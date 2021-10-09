@@ -9,5 +9,5 @@ Application Name: iPantry
 Github  
 Alex Agoos: aagoos  
 Megan Lew: lewmeg  
-Adrianna May: crowelladrianna
+Adrianna Crowell: crowelladrianna
 
