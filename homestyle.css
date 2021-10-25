@@ -1,0 +1,34 @@
+.filters{
+   background-color: lightblue;
+}
+
+.filters .col{
+    border-left: 1px gray dashed;
+    border-right: 1px gray dashed;
+    border-top: 1px gray solid;
+    border-bottom: 2px black solid;
+}
+
+.thumbnail {
+    height: 149px;
+    width: auto;
+    padding: 0px;
+    margin: 0px;
+}
+
+.entry {
+    height: 150px;
+    background-color: lightblue;
+}
+
+.entry-body > p {
+    padding: 0px;
+    margin: 10px;
+    line-height: 10px;
+}
+
+.entry-body > h1 {
+    padding: 0px;
+    margin: 0px;
+    line-height: 15px;
+}
