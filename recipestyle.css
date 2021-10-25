@@ -1,23 +1,32 @@
 /* Author: Megan Lew */
 
 body{
-    background-color:lightblue;
+    background-color:aliceblue;
     height: 600px;
     font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    color: teal;
 }
 
 .content{
     height: 100vh;
     padding: 30px 0;
-    background-color: lightblue;
+    background-color: aliceblue;
 }
 
 .content-left {
-    background-color: lightblue;
+    background-color: aliceblue;
 }
 
 .content-right {
-    background-color: lightblue;
+    background-color: aliceblue;
 }
 
 .content-left-image{
