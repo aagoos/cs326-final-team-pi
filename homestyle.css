@@ -9,9 +9,11 @@
     border-bottom: 2px black solid;
 }
 
-.card-img {
-    height: 150px;
+.thumbnail {
+    height: 149px;
     width: auto;
+    padding: 0px;
+    margin: 0px;
 }
 
 .entry {
