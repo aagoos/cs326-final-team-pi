@@ -1,3 +1,5 @@
+<!-- Author: Megan Lew -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,25 +8,70 @@
         <!-- Bootstrap Stuff -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.css"/>
+        <link rel="stylesheet" href="recipestyle.css">
         <title>iPantry Home</title>
     </head>
     <body>
 
-        <!-- Bootstrap Stuff -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>        
-    
-        <div main-container id="root">
-            <div left-pane>
-                <div image-area id="image-area"></div>
-                <div back-area></div>
-            </div>
-            <div right-pane>
-                <div recipe-name-area></div>
-                <div tab-area></div>
+        <div class="main-container" id="root">
+            <div class="content row">
+                <div class="content-left col-5">
+                    <!-- Go back -->
+                        <div class="content-back btn">
+                            <i class="fas fa-arrow-circle-left"></i>
+                            Go back
+                        </div>
+                        <!-- Image -->
+                        <div class="content-left-image"></div>
+                </div>
+                <div class="content-right col-7">
+                    <div class="recipe-main">
+                        <!-- Recipe Name -->
+                       <div class="recipe-name">
+                            <h2 class="recipe-subheading">Recipe Name</h2>
+                            <!-- Recipe Tags -->
+                            <div class="recipe-tags">
+                                <span class="badge rounded-pill bg-success">Vegetarian</span>
+                                <span class="badge rounded-pill bg-success">Peanuts</span>
+                                <span class="badge rounded-pill bg-success">Dairy</span>
+                                <span class="badge rounded-pill bg-success">Other tags</span>
+                            </div>
+                       </div>
+                       <!-- Tabs -->
+                       <div class="recipe-tabs">
+                        <div class="recipe-tab">
+                            <i class="fas fa-utensils"></i>
+                            <span>Ingredients</span>
+                        </div>
+                        <div class="recipe-tab recipe-tab-active">
+                            <i class="fas fa-book"></i>
+                            <span>Steps</span>
+                        </div>
+                       </div>
+                       <!-- Textbox Area -->
+                       <div class="recipe-detail">
+                           <!-- Ingredients -->
+                            <ul class="recipe-detail-list">
+                                <!-- Instructions -->
+                                <li class="recipe-detail-item">
+                                    Step 1: cut the ingredients into pieces
+                                </li>
+                                <li class="recipe-detail-item">
+                                    Step 2: cook the pieces
+                                </li>
+                                <li class="recipe-detail-item">
+                                    Step 3: eat the cooked pieces
+                                </li>
+                                <li class="recipe-detail-item">
+                                    etc.
+                                </li>
+                            </ul>
+                       </div>
+                    </div>
+                </div>
             </div>
         </div>
-    
     </body>
-
 </html>
