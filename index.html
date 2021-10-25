@@ -12,93 +12,111 @@
     </head>
     <body>
         <div class="main-container" id="root">
-            <!-- Adrianna's Part -->
-            <div class="ingredient-list" id="ingredient-list">
-                <div class="add-ingredient">
-                    <div class="ingredient-text">
-                        <input value="Add ingredient" type="text" id="ingredient-name">
-                    </div>
-                    <div class="ingredient-date">
-                        <input type="date" id="expiration">
-                    </div>
-                </div>
-                <div class="ingredients">
-                    <ul>
-                        <li>Milk</li>
-                        <li>Eggs</li>
-                        <li>Spinach</li>
-                    </ul> 
-                </div>
+            <div class="row mb-3">
+                <div class="title-bar"><h1>iPantry</h1></div>
             </div>
-            <!-- Alex -->
-            <div class="results-list" id="results-list">
-                <div class="filters container" id="filters">
-                    <div class="row">
-                        <div class="col">
-                            <div class="filter-controls form-check form-switch">
-                                <input type="checkbox" class="form-check-input" id="veganFilter" role="switch">
-                                <label class="form-check-label" for="veganFilter">Vegan</label>
+            <div class="row content">
+                <div class="col-3">
+                    <!-- Adrianna's Part -->
+                    <div class="ingredients container" id="ingredients">
+                        <div class="new-ingredient row">
+                            <div class="col">
+                                <input value="Add ingredient" type="text" id="ingredient-name">
+                            </div>
+                            <div class="col">
+                                <!-- TO DO: find or make icon -->
+                                <button type="button" class="add-ingredient"><b>+</b></button>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="filter-controls form-check form-switch">
-                                <input type="checkbox" class="form-check-input" id="vegetarianFilter" role="switch">
-                                <label class="form-check-label" for="vegetarianFilter">Vegetarian</label>
+                        <div class="ingredient-list row">
+                            <div class="ingredient">
+                                <span id="milk">Milk</span>
+                                <button type="button" class="update-ingredient"><b>+</b></button>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="filter-controls form-check form-switch">
-                                <input type="checkbox" class="form-check-input" id="treeFilter" role="switch">
-                                <label class="form-check-label" for="treeFilter">Tree Nuts</label>
+                            <div class="ingredient">
+                                <span id="eggs">Eggs</span>
+                                <button type="button" class="update-ingredient"><b>+</b></button>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="filter-controls form-check form-switch">
-                                <input type="checkbox" class="form-check-input" id="dairyFilter" role="switch">
-                                <label class="form-check-label" for="dairyFilter">Dairy</label>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-                <div class = "results-list list container">
-                    <div class="row result">
-                        <div class="card mb-3 entry">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                  <img alt="burgah" class="img-fluid rounded-start thumbnail" src="https://static01.nyt.com/images/2021/05/17/dining/kc-korean-bulgogi-burger/kc-korean-bulgogi-burger-mobileMasterAt3x.jpg">
-                                </div>
-                                <div class="col-md-8">
-                                  <div class="card-body entry-body" id="result1">
-                                    <a href="./recipe.html">
-                                        <h5 class="card-title" id="result1-name">Mega Burger</h5>
-                                    </a>                                    
-                                    <p class="card-text">Step 1: Cook da patty</p>
-                                    <p class="card-text">Step 2: Put da patty between some bread</p>                                        
-                                    <p class="card-text">Click to see all steps</p>
-                                    <p class="card-text" id="result1-tags"><small class="text-muted">Tags: Dairy, Beef</small></p>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3 entry">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                <img alt="piza" class="img-fluid rounded-start thumbnail" src="https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900">
-                                </div>
-                                <div class="col-md-8">
-                                <div class="card-body entry-body" id="result2">
-                                    <a href="./recipe.html">
-                                        <h5 class="card-title" id="result2-name">Ultra Pizza</h5>
-                                    </a>
-                                    <p class="card-text">Step 1: Make da dough</p>
-                                    <p class="card-text">Step 2: Put da toppin's on da dough</p>
-                                    <p class="card-text">Click to see all steps</p>
-                                    <p class="card-text" id="result2-tags"><small class="text-muted">Tags: Dairy, Vegetarian</small></p>
-                                </div>
+                            <div class="ingredient">
+                                <span id="spinach">Spinach</span>
+                                <button type="button" class="update-ingredient"><b>+</b></button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col">
+                    <!-- Alex -->
+                    <div class="results-list" id="results-list">
+                        <div class="filters container" id="filters">
+                            <div class="row filters">
+                                <div class="col">
+                                    <div class="filter-controls form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="veganFilter" role="switch">
+                                        <label class="form-check-label" for="veganFilter">Vegan</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="filter-controls form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="vegetarianFilter" role="switch">
+                                        <label class="form-check-label" for="vegetarianFilter">Vegetarian</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="filter-controls form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="treeFilter" role="switch">
+                                        <label class="form-check-label" for="treeFilter">Tree Nuts</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="filter-controls form-check form-switch">
+                                        <input type="checkbox" class="form-check-input" id="dairyFilter" role="switch">
+                                        <label class="form-check-label" for="dairyFilter">Dairy</label>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class = "results-list list container">
+                            <div class="row result">
+                                <div class="card mb-3 entry">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                        <img alt="burgah" class="img-fluid rounded-start thumbnail" src="https://static01.nyt.com/images/2021/05/17/dining/kc-korean-bulgogi-burger/kc-korean-bulgogi-burger-mobileMasterAt3x.jpg">
+                                        </div>
+                                        <div class="col-md-8">
+                                        <div class="card-body entry-body" id="result1">
+                                            <a href="./recipe.html">
+                                                <h5 class="card-title" id="result1-name">Mega Burger</h5>
+                                            </a>                                    
+                                            <p class="card-text">Step 1: Cook da patty</p>
+                                            <p class="card-text">Step 2: Put da patty between some bread</p>                                        
+                                            <p class="card-text">Click to see all steps</p>
+                                            <p class="card-text" id="result1-tags"><small class="text-muted">Tags: Dairy, Beef</small></p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3 entry">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                        <img alt="piza" class="img-fluid rounded-start thumbnail" src="https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900">
+                                        </div>
+                                        <div class="col-md-8">
+                                        <div class="card-body entry-body" id="result2">
+                                            <a href="./recipe.html">
+                                                <h5 class="card-title" id="result2-name">Ultra Pizza</h5>
+                                            </a>
+                                            <p class="card-text">Step 1: Make da dough</p>
+                                            <p class="card-text">Step 2: Put da toppin's on da dough</p>
+                                            <p class="card-text">Click to see all steps</p>
+                                            <p class="card-text" id="result2-tags"><small class="text-muted">Tags: Dairy, Vegetarian</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>

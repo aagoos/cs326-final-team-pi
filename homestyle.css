@@ -1,5 +1,52 @@
-.filters{
-   background-color: lightblue;
+.title-bar{
+    background-color: lightblue;
+    color: aliceblue;
+}
+
+h1{
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ingredient-list {
+    overflow-y: scroll;
+    height: 80%;
+    overflow: hidden;
+}
+
+.add-ingredient{
+    border: 2px darkgray solid;
+    color: darkgray;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.add-ingredient:hover{
+    border: 2px lightblue solid;
+    color: lightblue;
+}
+
+.update-ingredient{
+    border: none;
+    background-color: white;
+    color: darkgray;
+    text-align: center;
+    font-size: 15px;
+}
+
+.update-ingredient:hover{
+    color: lightblue;
+}
+
+.filters .row{
+   background-color: aliceblue;
 }
 
 .filters .col{
@@ -18,7 +65,7 @@
 
 .entry {
     height: 150px;
-    background-color: lightblue;
+    background-color: aliceblue;
 }
 
 .entry-body > p {
