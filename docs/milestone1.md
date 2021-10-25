@@ -4,9 +4,9 @@
 
 # Part 2: HTML and CSS
 
-![Home Page](home.png)
+![Home Page](home.PNG)
 
-![Recipe Page](recipe.png)
+![Recipe Page](recipe.PNG)
 
 # Part 3: Division of Labor
 
