@@ -1,0 +1,25 @@
+{
+    "recipes": [
+        {
+            "id": 0,
+            "title": "ham + cheese = genius?",
+            "ingredients": ["ham", "cheese", "bread"],
+            "steps": ["put da ham on da bread", "put da cheese on the ham and bread", "close ur sammich with more breadz"],
+            "tags": ["dairy", "wheat", "gluten"]
+        },
+        {
+            "id": 1,
+            "title": "knock your socks off good: pb & j",
+            "ingredients": ["peanutbutter", "jelly", "bread"],
+            "steps": ["spread peanut butter on your favorite bread", "wait 15 minutes - IMPORTANT", "add the jelly now, and consume"],
+            "tags": ["fruit", "jelly", "treenuts", "peanuts", "gluten"]
+        },
+        {
+            "id": 2,
+            "title": "grilled cheese",
+            "ingredients": ["cheese", "bread"],
+            "steps": ["preheat oven to 350", "spead cheese of your choice over the bread", "cook for 5 mintues, or until cheese melted", "remove from oven. let cool for a minute, then enjoy."],
+            "tags": ["wheat", "dairy", "gluten"]
+        }
+    ]
+}
