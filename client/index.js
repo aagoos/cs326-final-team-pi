@@ -1,6 +1,22 @@
 const { ENETRESET } = require("constants");
 const e = require("express");
 
+const recipes = [{
+        id: 123,
+        title: "ham + cheese = genius?",
+        ingredients: ["ham", "cheese", "bread"],
+        steps: ["put da ham on da bread", "put da cheese on the ham and bread", "close ur sammich with more bread"],
+        tags:["dairy","wheat","gluten"]
+    },
+    {
+        id: 123,
+        title: "ham + cheese = genius?",
+        ingredients: ["ham", "cheese", "bread"],
+        steps: ["put da ham on da bread", "put da cheese on the ham and bread", "close ur sammich with more bread"],
+        tags:["dairy","wheat","gluten"]
+    }
+];
+
 function populateRecipes(recipesArr){
     const container = document.getElementById("recipe-parent");
     for (let recipe of recipesArr){
@@ -43,6 +59,8 @@ function populateRecipes(recipesArr){
         row.appendChild(imgCol);
         row.appendChild(recipeCol);
         entry.appendChild(row);
-        parent.appendChild(entry);
+        container.appendChild(entry);
     }
 }
+
+document.body.onload(populateRecipes(recipes));
