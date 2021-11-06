@@ -38,7 +38,7 @@ app.get("/lookup", (req, res) => {
 });
 
 //listen for requests
-app.listen(port || process.env.PORT, () => {
-    let num = port || process.env.PORT; //to make heroku happy
+app.listen(process.env.PORT || port, () => {
+    let num = process.env.PORT || port; //to make heroku happy
     console.log(`Now listening for requests on port ${num}`);
 })
