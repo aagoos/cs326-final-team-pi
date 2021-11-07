@@ -17,7 +17,13 @@ app.get("/recipes", (req, res) => {
 
 //placeholder for PUT, which will be create and update of CRUD
 app.put("/recipes", (req, res) => {
+    //dont actually modfiy the test database, dummy request for now
+    let data = {}; //processed request, dummy data
+    db.put(data);
     
+    //respond with OK
+    res.statusCode = 200;
+    res.end();
 });
 
 //placeholder for POST, which will be the create of CRUD
@@ -33,7 +39,13 @@ app.post("/recipes", (req, res) => {
 
 //placeholder for delete, which will be delete of CRUD
 app.delete("/recipes", (req, res) => {
+    //dont actually modfiy the test database, dummy request for now
+    let id = 1000000; //processed request, dummy data
+    db.delete(id);
     
+    //respond with OK
+    res.statusCode = 200;
+    res.end();
 });
 
 //semi-complete code for GET requests to /recipes
