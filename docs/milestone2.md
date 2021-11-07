@@ -49,7 +49,7 @@ Example response:
 ## /recipes POST
 Adds a new recipe to the database. Does nothing if a recipe with that ID already exists (compare: /recipes PUT)
 
-Example POST request: `curl -d '{"id": 10, "title": ham, "ingredients":["ham"], "steps":["eat"], "tags":[]}' -H 'Content-Type: application/json' -X POST`
+Example POST request: `curl -d '{"id": 10, "title": ham, "ingredients":["ham"], "steps":["eat"], "tags":[]}' -H 'Content-Type: application/json' -X POST localhost:8080/recipes`
 
 Example response: 
 HTTP 200: OK
@@ -65,7 +65,7 @@ HTTP 200: OK
 ## /recipes DELETE
 Deletes a recipe with the given ID from the database. Does nothing if no recipe has the given ID.
 
-Example DELETE request: `curl -X DELETE localhost:8080/recipes?id=5`
+Example DELETE request: `curl -d '{"id": 5}' -H 'Content-Type: application/json' -X DELETE localhost:8080/recipes`
 
 Example response: 
 HTTP 200: OK
