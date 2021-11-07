@@ -31,4 +31,4 @@ https://cs326-final-team-pi.herokuapp.com/
 
 Adrianna: Wrote populateRecipes in index.js, wrote put in server.js 
 Alex:  
-Megan:  
+Megan:  Wrote front-end implementation for recipe page in recipe.js, made changes to recipe.html and recipestyle.css and wrote delete in server.js
