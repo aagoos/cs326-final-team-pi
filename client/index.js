@@ -60,7 +60,12 @@ function populateRecipes(recipesArr){
     }
 }
 
-window.onload = () => populateRecipes(recipes);
+window.onload = () => {
+    populateRecipes(recipes);
+    //remove the test elements from the ingredients tab, since the buttons won't work for those
+    const container = document.getElementById("ingredients").getElementsByClassName("ingredient-list")[0];
+    container.innerHTML = '';
+};
 
 
 //add a new ingredient
