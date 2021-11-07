@@ -41,7 +41,7 @@ app.post("/recipes", (req, res) => {
 app.delete("/recipes", (req, res) => {
     //dont actually modfiy the test database, dummy request for now
     let id = 1; //processed request, dummy data
-    db.delete(id);
+    db.remove(id);
     
     //respond with OK
     res.statusCode = 200;
