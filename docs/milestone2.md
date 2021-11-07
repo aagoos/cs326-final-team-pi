@@ -73,16 +73,16 @@ HTTP 200: OK
 # Screenshots
 
 Home page: type ingredient and select + to add
-![home page preadd](/addhome.PNG)
+![home page preadd](addhome.PNG)
 
 Home page: after adding. Clicking - deletes the ingredient. Clicking the small + updates the entry with current values.
-![home page postadd](/addhome.PNG)
+![home page postadd](addhome.PNG)
 
 Recipe page: tab showing ingredients
-![recipe page ing](/recipe-page-ingredients.PNG)
+![recipe page ing](recipe-page-ingredients.PNG)
 
 Recipe page: tab showing steps
-![recipe page ing](/recipe-page-steps.PNG)
+![recipe page steps](recipe-page-steps.PNG)
 
 
 
