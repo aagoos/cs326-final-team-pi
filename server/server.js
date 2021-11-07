@@ -40,7 +40,7 @@ app.post("/recipes", (req, res) => {
 //placeholder for delete, which will be delete of CRUD
 app.delete("/recipes", (req, res) => {
     //dont actually modfiy the test database, dummy request for now
-    let id = 1000000; //processed request, dummy data
+    let id = 1; //processed request, dummy data
     db.delete(id);
     
     //respond with OK
