@@ -60,4 +60,34 @@ function populateRecipes(recipesArr){
     }
 }
 
-document.body.onload(populateRecipes(recipes));
+window.onload = () => populateRecipes(recipes);
+
+
+function addIngredient(name, date) {
+    const container = document.getElementById("ingredients").getElementsByClassName("ingredient-list")[0];
+    let ingredient = document.createElement("div");
+    ingredient.classList.add("ingredient");
+
+    let nameField = document.createElement("span");
+    nameField.id = name;
+    nameField.innerText = name + " " + date;
+
+    ingredient.appendChild(nameField);
+
+    let updateButton = document.createElement("button");
+    updateButton.type = "button";
+    updateButton.classList.add("update-ingredient");
+    updateButton.innerHTML = "<b>+</b>"
+
+    ingredient.appendChild(updateButton);
+
+    container.appendChild(ingredient);
+}
+
+//listeners for buttons
+document.getElementById("add-button").addEventListener('click', () => {
+    const datepicker = document.getElementById("date-picker");
+    const name = document.getElementById("ingredient-name").value;
+    const date = datepicker.value;
+    addIngredient(name , date);
+});
