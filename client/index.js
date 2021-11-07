@@ -2,8 +2,9 @@ const recipes = recipeRequest();
 
 
 async function recipeRequest() {
-    const res = await (await fetch(window.location.host + "/recipes"));
-    return await res.json();
+    const res = await fetch(window.location.host + "/recipes");
+    let json =  await res.json();
+    return json.recipes;
 }
 
 function populateRecipes(recipesArr){
