@@ -79,5 +79,7 @@ https://cs326-final-team-pi.herokuapp.com/
 # Division of Labor
 
 Adrianna: Wrote populateRecipes in index.js, wrote put in server.js 
-Alex:  
+
+Alex:  Wrote database.js shell, wrote framework and recipes GET and lookup GET and recipes POST. Implemented code for buttons for adding/updating/dating ingredients in index.js, wrote testdata.json, setup heroku, changed index.js to make a get request instead of const data.
+
 Megan:  Wrote front-end implementation for recipe page in recipe.js, made changes to recipe.html and recipestyle.css and wrote delete in server.js
