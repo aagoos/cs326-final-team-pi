@@ -76,7 +76,7 @@ Home page: type ingredient and select + to add
 ![home page preadd](addhome.PNG)
 
 Home page: after adding. Clicking - deletes the ingredient. Clicking the small + updates the entry with current values.
-![home page postadd](addhome.PNG)
+![home page postadd](addedupdatedhome.PNG)
 
 Recipe page: tab showing ingredients
 ![recipe page ing](recipe-page-ingredients.PNG)
