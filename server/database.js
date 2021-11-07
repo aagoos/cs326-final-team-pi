@@ -33,7 +33,7 @@ function find(id){
 //create a new recipe in the database
 //be careful of ID collisions
 function insert(data){
-
+    //we don't want to modify the database yet, so we do nothing here (for now)
 }
 
 //update or create a recipe (will replace a recipe with the same id)

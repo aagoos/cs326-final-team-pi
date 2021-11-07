@@ -22,7 +22,13 @@ app.put("/recipes", (req, res) => {
 
 //placeholder for POST, which will be the create of CRUD
 app.post("/recipes", (req, res) => {
-    
+    //dont actually modfiy the test database, dummy request for now
+    let data = {}; //processed request, dummy data
+    db.insert(data);
+
+    //resond with OK
+    res.statusCode = 200;
+    res.end();
 });
 
 //placeholder for delete, which will be delete of CRUD
