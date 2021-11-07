@@ -1,8 +1,15 @@
-const recipes = recipeRequest();
 
+let recipes = [];
+const recipeReq = async () => {
+    const result = await recipeRequest();
+    return result;
+};
+recipeReq().then(data => {
+    recipes = data;
+}).catch(e => console.log("failed to fetch recipes"));
 
 async function recipeRequest() {
-    const res = await fetch(window.location.host + "/recipes");
+    const res = await fetch("./recipes");
     let json =  await res.json();
     return json.recipes;
 }
