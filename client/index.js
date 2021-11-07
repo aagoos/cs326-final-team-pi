@@ -4,9 +4,6 @@ const recipeReq = async () => {
     const result = await recipeRequest();
     return result;
 };
-recipeReq().then(data => {
-    recipes = data;
-}).catch(e => console.log("failed to fetch recipes"));
 
 async function recipeRequest() {
     const res = await fetch("./recipes");
@@ -61,7 +58,10 @@ function populateRecipes(recipesArr){
 }
 
 window.onload = () => {
-    populateRecipes(recipes);
+    recipeReq().then(data => {
+        recipes = data;
+        populateRecipes(recipes);
+    }).catch(e => console.log("failed to fetch recipes"));
     //remove the test elements from the ingredients tab, since the buttons won't work for those
     const container = document.getElementById("ingredients").getElementsByClassName("ingredient-list")[0];
     container.innerHTML = '';
