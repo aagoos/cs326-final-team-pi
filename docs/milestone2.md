@@ -14,9 +14,8 @@ Example response:
     "steps":
     [
         "put da ham on da bread",
-        "put da cheese on the ham and 
-        bread",
-    "close ur sammich with more breadz"
+        "put da cheese on the ham and bread",
+        "close ur sammich with more breadz"
     ],
     "tags":["dairy","wheat","gluten"]
 }
