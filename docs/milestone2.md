@@ -72,6 +72,12 @@ HTTP 200: OK
 
 # Screenshots
 
+Home page: type ingredient and select + to add
+[home page preadd](/addhome.PNG)
+
+Home page: after adding. Clicking - deletes the ingredient. Clicking the small + updates the entry with current values.
+[home page preadd](/addhome.PNG)
+
 # Heroku URL
 
 https://cs326-final-team-pi.herokuapp.com/
