@@ -2,7 +2,7 @@ const recipes = recipeRequest();
 
 
 async function recipeRequest() {
-    const res = await (await fetch(window.location.host + "/recipe"));
+    const res = await (await fetch(window.location.host + "/recipes"));
     return await res.json();
 }
 
