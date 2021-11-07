@@ -30,6 +30,6 @@ https://cs326-final-team-pi.herokuapp.com/
 
 # Division of Labor
 
-Adrianna:  
+Adrianna: Wrote populateRecipes in index.js, wrote put in server.js 
 Alex:  
 Megan:  
