@@ -63,25 +63,64 @@ function populateRecipes(recipesArr){
 window.onload = () => populateRecipes(recipes);
 
 
+//add a new ingredient
 function addIngredient(name, date) {
     const container = document.getElementById("ingredients").getElementsByClassName("ingredient-list")[0];
+    
+    //create an ingredient entry
     let ingredient = document.createElement("div");
     ingredient.classList.add("ingredient");
 
+    //create the entry with the name
     let nameField = document.createElement("span");
     nameField.id = name;
     nameField.innerText = name + " " + date;
 
     ingredient.appendChild(nameField);
 
-    let updateButton = document.createElement("button");
-    updateButton.type = "button";
-    updateButton.classList.add("update-ingredient");
-    updateButton.innerHTML = "<b>+</b>"
-
-    ingredient.appendChild(updateButton);
+    //append update and delete buttons
+    appendIngredientButtons(ingredient, container);
 
     container.appendChild(ingredient);
+}
+
+//appends the update/delete buttons to an ingredient
+function appendIngredientButtons(elem, container){
+        //create the update button
+        let updateButton = document.createElement("button");
+        updateButton.type = "button";
+        updateButton.classList.add("update-ingredient");
+        updateButton.innerHTML = "<b>+</b>"
+    
+        //add the listener for the update button
+        updateButton.addEventListener("click", () => {
+            updateIngredient(elem, container);
+        })
+    
+         //create the delete button
+         let deleteButton = document.createElement("button");
+         deleteButton.type = "button";
+         deleteButton.classList.add("update-ingredient");
+         deleteButton.innerHTML = "<b>-</b>"
+    
+         //add the listener for the delete button
+        deleteButton.addEventListener("click", () => {
+            container.removeChild(elem);
+        })
+    
+        elem.appendChild(updateButton);
+        elem.appendChild(deleteButton);
+}
+
+//update an existing ingredient
+function updateIngredient(elem, container){
+    const datepicker = document.getElementById("date-picker");
+    const name = document.getElementById("ingredient-name").value;
+    const date = datepicker.value;
+
+    elem.id = name;
+    elem.innerText = name + " " + date;
+    appendIngredientButtons(elem, container);
 }
 
 //listeners for buttons
