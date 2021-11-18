@@ -3,6 +3,10 @@
 const fs = require("fs");
 const path = require("path")
 
+const { MongoClient } = require('mongodb');
+const uri = require(path.resolve(__dirname, "./secret.json")).key;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 //wrapper for CRUD stuff
 //return all recipe results which match the query
 function findAll(query){
@@ -14,7 +18,17 @@ function findAll(query){
 
 //return the first recipe result which matches the query, or undefined if there are no matches
 function findFirst(query){
+    (async () => {
+        await client.connect();
 
+        const collection = await client.db("data").collection("recipes");
+        
+        //const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
+        //await collection.insertMany(json.recipes)
+        //console.log("test")
+        
+        client.close();
+    })();    
 }
 
 //same as findFirst, but specifies an ID directly
