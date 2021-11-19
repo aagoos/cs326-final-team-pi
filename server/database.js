@@ -35,7 +35,7 @@ function findFirst(query){
 // connects to recipes database
 const connectDB = async () => {
     try {
-       await mongoose.connect(`${uri}/recipes`);
+       await mongoose.connect(`${uri}`);
        console.log('DB connected!');   
     } catch (error) {
         console.log(error);
