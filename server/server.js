@@ -4,8 +4,6 @@ const db = require("./database")
 const app = express();
 const port = 8080;
 const client = "/../client"
-const {connectDB} = require('./database');
-connectDB();
 
 //serve client files
 app.use(express.static(__dirname + client));
