@@ -9,17 +9,17 @@ const client = "/../client"
 app.use(express.static(__dirname + client));
 
 //semi-complete code for GET requests to /recipes
-app.get("/recipes", (req, res) => {
+app.get("/recipes", async (req, res) => {
     //send test data for now
-    res.json(db.findAll("dummy request"));
+    res.json(await db.findAll("dummy request"));
     res.end();
 });
 
 //placeholder for PUT, which will be create and update of CRUD
-app.put("/recipes", (req, res) => {
+app.put("/recipes", async (req, res) => {
     //dont actually modfiy the test database, dummy request for now
     let data = {}; //processed request, dummy data
-    db.put(data);
+    await db.put(data);
     
     //respond with OK
     res.statusCode = 200;
@@ -27,10 +27,10 @@ app.put("/recipes", (req, res) => {
 });
 
 //placeholder for POST, which will be the create of CRUD
-app.post("/recipes", (req, res) => {
+app.post("/recipes", async (req, res) => {
     //dont actually modfiy the test database, dummy request for now
     let data = {}; //processed request, dummy data
-    db.insert(data);
+    await db.insert(data);
 
     //resond with OK
     res.statusCode = 200;
@@ -38,10 +38,10 @@ app.post("/recipes", (req, res) => {
 });
 
 //placeholder for delete, which will be delete of CRUD
-app.delete("/recipes", (req, res) => {
+app.delete("/recipes", async (req, res) => {
     //dont actually modfiy the test database, dummy request for now
     let id = 1; //processed request, dummy data
-    db.remove(id);
+    await db.remove(id);
     
     //respond with OK
     res.statusCode = 200;
@@ -49,9 +49,10 @@ app.delete("/recipes", (req, res) => {
 });
 
 //semi-complete code for GET requests to /recipes
-app.get("/lookup", (req, res) => {
-    //send test data for now
-    res.json(db.find("dummy request"));
+app.get("/lookup", async (req, res) => {
+    
+    let id = parseInt(req.query.id);
+    res.json(await db.findFirst({"id": id}));
     res.end();
 });
 
@@ -59,4 +60,4 @@ app.get("/lookup", (req, res) => {
 app.listen(process.env.PORT || port, () => {
     let num = process.env.PORT || port; //to make heroku happy
     console.log(`Now listening for requests on port ${num}`);
-})
+});
