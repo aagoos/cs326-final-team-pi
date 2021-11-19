@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path")
 
 const { MongoClient } = require('mongodb');
+const mongoose = require("mongoose");
 const uri = require(path.resolve(__dirname, "./secret.json")).key;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -29,6 +30,17 @@ function findFirst(query){
         
         client.close();
     })();    
+}
+
+// connects to recipes database
+const connectDB = async () => {
+    try {
+       await mongoose.connect(`${uri}/recipes`);
+       console.log('DB connected!');   
+    } catch (error) {
+        console.log(error);
+    }
+ 
 }
 
 //same as findFirst, but specifies an ID directly
@@ -69,3 +81,5 @@ module.exports.findFirst = findFirst
 module.exports.insert = insert;
 module.exports.put = put;
 module.exports.remove = remove;
+
+module.exports.connectDB = connectDB;
