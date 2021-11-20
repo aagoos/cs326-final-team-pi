@@ -19,17 +19,21 @@ function start(){
 //add test data
 async function addMany(){
     console.log('add many');
-    const collection =  client.db("data").collection("recipes");
+    const database =  client.db("data").collection("recipes");
     const recipes = parseRecipe();
     await collection.insertMany(recipes);
 }
 //wrapper for CRUD stuff
 //return all recipe results which match the query
-async function findAll(query){
+async function findAll(){
     //dummy response
     //load all the test data and return it
-    const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
-    return json;
+    // const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
+    // return json;
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    const recipes = await Recipe.find({}).toArray();
+    return recipes;
 }
 
 //return the first recipe result which matches the query, or undefined if there are no matches

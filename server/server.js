@@ -11,7 +11,7 @@ app.use(express.static(__dirname + client));
 //semi-complete code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
     //send test data for now
-    res.json(await db.findAll("dummy request"));
+    res.json(await db.findAll());
     res.end();
 });
 
