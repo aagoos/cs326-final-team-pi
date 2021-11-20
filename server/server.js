@@ -2,23 +2,21 @@
 const express = require("express");
 const db = require("./database")
 const app = express();
-app.use(express.json());
 const port = 8080;
 const client = "/../client"
 
 //serve client files
 app.use(express.static(__dirname + client));
-
 app.use(express.json());
 
-//semi-complete code for GET requests to /recipes
+//code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
     //send test data for now
     res.json(await db.findAll());
     res.end();
 });
 
-//placeholder for PUT, which will be create and update of CRUD
+//for PUT, which will be create and update of CRUD
 app.put("/recipes", async (req, res) => {
 
     let data = req.body; //processed request
@@ -29,12 +27,16 @@ app.put("/recipes", async (req, res) => {
     res.end();
 });
 
-//placeholder for POST, which will be the create of CRUD
+//for POST, which will be the create of CRUD
 app.post("/recipes", async (req, res) => {
-    //dont actually modfiy the test database, dummy request for now
+
     const {body} = req;
     if(!body.id || !body.steps && !body.ingredients || !body.name){
         res.status(403).send('Please add all the required fields');
+        res.end();
+    }
+    else if(await db.findFirst({'id':body.id}) !== null){ //if the element is ALREADY PRESENT, fail
+        res.status(403).send('Entry with id ' + body.id + " already exists. If you meant to update, use PUT instead of POST.");
         res.end();
     }
 
@@ -55,7 +57,7 @@ app.post("/recipes", async (req, res) => {
     res.end();
 });
 
-//placeholder for delete, which will be delete of CRUD
+//for delete, which will be delete of CRUD
 app.delete("/recipes", async (req, res) => {
     const {body} = req;
     if(!body.id){
@@ -71,8 +73,12 @@ app.delete("/recipes", async (req, res) => {
 
 //complete code for GET requests to /recipes
 app.get("/lookup", async (req, res) => {
+
     let id = req.query.id;
-    res.json(await db.findFirst({"id": id}));
+    if(!req.query.id){
+        res.status(403).send('ID is required.');
+    }
+    res.json(await db.findFirst({"id": parseInt(id)}));
     res.end();
 });
 

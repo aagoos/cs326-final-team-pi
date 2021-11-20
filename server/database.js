@@ -10,10 +10,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 start();
 
 function start(){
-    (async() =>{
-         await client.connect();
-        // addMany();
-        })();
+    (async() => await client.connect())();
 }
 
 //add test data
@@ -42,15 +39,7 @@ async function findFirst(query){
 
 //same as findFirst, but specifies an ID directly
 async function find(id){
-    //dummy response
-    //return recipe 0
-    const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
-    for(let recipe of json.recipes){
-        if(recipe.id === 0){
-            return recipe;
-        }
-    }
-    return undefined;
+    return await findFirst({'id': id});
 }
 
 //create a new recipe in the database
@@ -58,6 +47,10 @@ async function find(id){
 async function insert(data){
     const database = client.db("data");
     const Recipe = database.collection('recipes');
+
+    //messes with mongo if it is present
+    delete data._id;
+
     const recipe = await Recipe.insertOne(data);
     return data;
 }
@@ -70,6 +63,9 @@ async function put(data){
     const entry = await findFirst({'id': data.id});
     const present = entry === null ? false : true;
     const collection = client.db("data").collection("recipes");
+
+    //messes with mongo if it is present
+    delete data._id;
 
     //create if absent
     if(!present){
@@ -86,7 +82,7 @@ async function put(data){
 async function remove(id) {
     const database = client.db("data");
     const Recipe = database.collection('recipes');
-    await Recipe.deleteOne({id});
+    await Recipe.deleteOne({'id': id});
 }
 
 //exports
