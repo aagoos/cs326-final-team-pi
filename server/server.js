@@ -48,10 +48,9 @@ app.delete("/recipes", async (req, res) => {
     res.end();
 });
 
-//semi-complete code for GET requests to /recipes
+//complete code for GET requests to /recipes
 app.get("/lookup", async (req, res) => {
-    
-    let id = parseInt(req.query.id);
+    let id = req.query.id;
     res.json(await db.findFirst({"id": id}));
     res.end();
 });

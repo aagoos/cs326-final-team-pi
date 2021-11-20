@@ -26,10 +26,6 @@ async function addMany(){
 //wrapper for CRUD stuff
 //return all recipe results which match the query
 async function findAll(){
-    //dummy response
-    //load all the test data and return it
-    // const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
-    // return json;
     const database = client.db("data");
     const Recipe = database.collection('recipes');
     const recipes = await Recipe.find({}).toArray();
@@ -38,9 +34,10 @@ async function findAll(){
 
 //return the first recipe result which matches the query, or undefined if there are no matches
 async function findFirst(query){
-    const collection = client.db("data").collection("recipes");
-    const res = await collection.findOne(query, {});
-    return res;
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    const recipe = await Recipe.findOne(query);
+    return recipe;
 }
 
 //same as findFirst, but specifies an ID directly
