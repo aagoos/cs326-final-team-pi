@@ -23,7 +23,7 @@ async function generateIngredientQuery(){
         name = "[" + name.substring(0,1) + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
         ingreds.push("__REGEX__" + new RegExp(name).toString() + "__REGEX__"); 
     }
-    const query = {"ingredients": {"$in": ingreds}};
+    const query = {"ingredients": {"$all": ingreds}};
     return query;
 
 
