@@ -13,12 +13,17 @@ app.use(express.json());
 //code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
     //pre-parse to avoid regex deserialization errors in JSON parser
-    res.json(await db.findAll(JSON.parse(req.query.search, (k, v) => {
-        if(k.toString().startsWith("__REGEX__")){
-            k = k.replace(/__REGEX__[\"|\']/, "").replace(/[\"|\']__REGEX__/, "");
+    const reviver = (k, v) => {
+        let result = v;
+        if(v !== undefined && String(v).startsWith("__REGEX__")){
+            result = String(v);
+            result = new RegExp(result.replace(/__REGEX__\/?/, "").replace(/\/?__REGEX__/, ""));
         }
-        return k;
-    })));
+        return result;
+    }
+    const query = JSON.parse(req.query.search, reviver);
+
+    res.json(await db.findAll(query));
     res.end();
 });
 

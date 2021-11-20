@@ -17,16 +17,21 @@ async function recipeRequest() {
 async function generateIngredientQuery(){
     let ingreds = [];
     let ingredients = document.getElementsByClassName("ingredient");
-    //custom serialization to get around stringify not handling regular expressions
-    ingreds.push("__REGEX__" + new RegExp("onion","i").toString() + "__REGEX__"); 
+    for(const elem of ingredients) {
+        //custom serialization to get around JSON stringify not handling regular expressions properly
+        let name = elem.firstChild.id;
+        name = "[" + name.substring(0,1) + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
+        ingreds.push("__REGEX__" + new RegExp(name).toString() + "__REGEX__"); 
+    }
     const query = {"ingredients": {"$in": ingreds}};
     return query;
 
 
 }
 
-function populateRecipes(recipesArr){
+async function populateRecipes(recipesArr){
     const container = document.getElementById("recipe-parent");
+    container.innerHTML = '';
     for (let recipe of recipesArr){
         const entry = document.createElement("div");
         entry.classList.add("card");
@@ -74,14 +79,15 @@ function populateRecipes(recipesArr){
 window.onload = () => {
     (async () => {
         try {
+            //as a starter so something is in the display
+            addIngredient("onion", "");
+
             recipes = await recipeReq();
-            populateRecipes(recipes);
+            await populateRecipes(recipes);
         }
         catch(err){
             console.log("failed to fetch recipes" + err)
         }
-        //as a starter so something is in the display
-        addIngredient("onion", "");
     })();
 
 };
@@ -106,6 +112,12 @@ function addIngredient(name, date) {
     appendIngredientButtons(ingredient, container);
 
     container.appendChild(ingredient);
+
+    //repopuluate
+    (async () => {
+        recipes = await recipeReq();
+        await populateRecipes(recipes);
+    })()
 }
 
 //appends the update/delete buttons to an ingredient
@@ -130,6 +142,12 @@ function appendIngredientButtons(elem, container){
          //add the listener for the delete button
         deleteButton.addEventListener("click", () => {
             container.removeChild(elem);
+
+            //repopuluate
+            (async () => {
+                recipes = await recipeReq();
+                await populateRecipes(recipes);
+            })()
         })
     
         elem.appendChild(updateButton);
@@ -145,6 +163,13 @@ function updateIngredient(elem, container){
     elem.id = name;
     elem.innerText = name + " " + date;
     appendIngredientButtons(elem, container);
+
+    //repopuluate
+    (async () => {
+        recipes = await recipeReq();
+        await populateRecipes(recipes);
+    })()
+
 }
 
 //listeners for buttons
