@@ -1,4 +1,4 @@
-const testData = require('./recipesData.json');
+//const testData = require('./recipesData.json');
 const fs = require('fs');
 const instructionToStepConverter = (str) => str.split('.');
 
