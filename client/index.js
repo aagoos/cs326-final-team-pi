@@ -72,6 +72,12 @@ async function populateRecipes(recipesArr){
         row.appendChild(imgCol);
         row.appendChild(recipeCol);
         entry.appendChild(row);
+
+        //add a listener for the entry
+        entry.addEventListener('click', () => {
+            window.localStorage.setItem("lastClicked", String(recipe.id));
+        })
+
         container.appendChild(entry);
     }
 }

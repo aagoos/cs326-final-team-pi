@@ -1,11 +1,11 @@
 /* Author: Megan Lew */
 
 // getRecipeData makes a GET request to /recipes to get the recipe data from a server
-const getRecipeData = async() => {
+const getRecipeData = async(id) => {
     try {
-        const data = await fetch('/recipes');
+        const data = await fetch('/lookup?id=' + id);
         const dataJSON = await data.json();
-        return dataJSON.recipes;
+        return dataJSON;
     } catch (error) {
         console.log(error);
     }
@@ -24,8 +24,8 @@ const ingredientsTab = document.getElementById('ingredient-tab');
 const instructionsTab = document.getElementById('instruction-tab');
 
 // function to get the active recipe by ID
-function getActiveRecipe(id){
-    return recipeData.find((item) => item.id === id);
+async function getActiveRecipe(id){
+    return await getRecipeData(id);
 }
 
 // function to update instructions or ingredients area
@@ -51,30 +51,33 @@ const updateDetails = (details, type) => {
 // function to update template with database recipe data
 function updateRecipe(){
     // gets active recipe using ID
-    const recipe = getActiveRecipe(1);
-    // checks if recipe exists
-    if(recipe){
-        // destructure recipe property values
-        const {ingredients, tags, steps, title: name}= recipe;
-        // updates recipe title
-        recipeNameSection.querySelector('.recipe-subheading').textContent = name;
-        // select recipe tags container
-        const tagsDom = recipeNameSection.querySelector('.recipe-tags');
-        // converts our tags array into HTML string
-        const tagsHTMLTemplate = tags.map((tag) => {
-            return `<span class="badge rounded-pill bg-success">${tag}</span>`
-        }).join(' ');
-        // replace inner HTML with our dynamic HTML
-        tagsDom.innerHTML = tagsHTMLTemplate;
-        updateDetails(steps, 'step');
-    }
+    (async() => {
+        const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
+        console.log(recipe)
+        // checks if recipe exists
+        if(recipe){
+            // destructure recipe property values
+            const {ingredients, tags, steps, title: name}= recipe;
+            // updates recipe title
+            recipeNameSection.querySelector('.recipe-subheading').textContent = name;
+            // select recipe tags container
+            const tagsDom = recipeNameSection.querySelector('.recipe-tags');
+            // converts our tags array into HTML string
+            const tagsHTMLTemplate = tags.map((tag) => {
+                return `<span class="badge rounded-pill bg-success">${tag}</span>`
+            }).join(' ');
+            // replace inner HTML with our dynamic HTML
+            tagsDom.innerHTML = tagsHTMLTemplate;
+            updateDetails(steps, 'step');
+        }
+    })();
 }
 
 getRecipeData();
 
 // when user clicks ingredients tab it becomes active
-ingredientsTab.addEventListener('click', () => {
-    const recipe = getActiveRecipe(1);
+ingredientsTab.addEventListener('click', async () => {
+    const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
     if(recipe){
         const { ingredients } = recipe;
         updateDetails(ingredients, 'ingredient');
@@ -82,8 +85,9 @@ ingredientsTab.addEventListener('click', () => {
 })
 
 // when user clicks instructions tab it becomes active
-instructionsTab.addEventListener('click', () => {
-    const recipe = getActiveRecipe(1);
+instructionsTab.addEventListener('click', async () => {
+    const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
+
     if(recipe){
         const { steps } = recipe;
         updateDetails(steps, 'steps');
