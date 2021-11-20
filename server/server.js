@@ -1,4 +1,5 @@
 'use strict'
+const e = require("express");
 const express = require("express");
 const db = require("./database")
 const app = express();
@@ -11,8 +12,13 @@ app.use(express.json());
 
 //code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
-    console.log(JSON.parse(req.query.search));
-    res.json(await db.findAll(JSON.parse(req.query.search)));
+    //pre-parse to avoid regex deserialization errors in JSON parser
+    res.json(await db.findAll(JSON.parse(req.query.search, (k, v) => {
+        if(k.toString().startsWith("__REGEX__")){
+            k = k.replace(/__REGEX__[\"|\']/, "").replace(/[\"|\']__REGEX__/, "");
+        }
+        return k;
+    })));
     res.end();
 });
 

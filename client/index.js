@@ -6,6 +6,7 @@ const recipeReq = async () => {
 };
 
 async function recipeRequest() {
+
     const queryJSON = JSON.stringify(await generateIngredientQuery());
     const res = await fetch("./recipes?search="+queryJSON);
     let json =  await res.json();
@@ -16,9 +17,9 @@ async function recipeRequest() {
 async function generateIngredientQuery(){
     let ingreds = [];
     let ingredients = document.getElementsByClassName("ingredient");
-    ingreds.push("ham");
+    //custom serialization to get around stringify not handling regular expressions
+    ingreds.push("__REGEX__" + new RegExp("onion","i").toString() + "__REGEX__"); 
     const query = {"ingredients": {"$in": ingreds}};
-    // console.log(query);
     return query;
 
 
