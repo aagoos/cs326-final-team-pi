@@ -4,28 +4,40 @@ const fs = require("fs");
 const path = require("path")
 
 const { MongoClient } = require('mongodb');
+const { parseRecipe } = require('./utilities');
 const uri = process.env.CONNECTION_URI || require(path.resolve(__dirname, "./secret.json")).key;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 start();
 
 function start(){
-    (async() => await client.connect())();
+    (async() =>{
+         await client.connect();
+        // addMany();
+        })();
 }
 
+//add test data
+async function addMany(){
+    console.log('add many');
+    const database =  client.db("data").collection("recipes");
+    const recipes = parseRecipe();
+    await collection.insertMany(recipes);
+}
 //wrapper for CRUD stuff
 //return all recipe results which match the query
-async function findAll(query){
-    //dummy response
-    //load all the test data and return it
-    const json = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./testData.json"), "utf-8"));
-    return json;
+async function findAll(){
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    const recipes = await Recipe.find({}).toArray();
+    return recipes;
 }
 
 //return the first recipe result which matches the query, or undefined if there are no matches
 async function findFirst(query){
-    const collection = client.db("data").collection("recipes");
-    const res = await collection.findOne(query, {});
-    return res;
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    const recipe = await Recipe.findOne(query);
+    return recipe;
 }
 
 //same as findFirst, but specifies an ID directly
@@ -44,7 +56,10 @@ async function find(id){
 //create a new recipe in the database
 //be careful of ID collisions
 async function insert(data){
-    //we don't want to modify the database yet, so we do nothing here (for now)
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    const recipe = await Recipe.insertOne(data);
+    return data;
 }
 
 //update or create a recipe (will replace a recipe with the same id)
@@ -69,13 +84,15 @@ async function put(data){
 
 //delete a recipe with the specified id. Does nothing if the ID was not present.
 async function remove(id) {
-    
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    await Recipe.deleteOne({id});
 }
 
 //exports
 module.exports.find = find;
 module.exports.findAll = findAll;
-module.exports.findFirst = findFirst
+module.exports.findFirst = findFirst;
 
 module.exports.insert = insert;
 module.exports.put = put;
