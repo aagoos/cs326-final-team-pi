@@ -11,8 +11,8 @@ app.use(express.json());
 
 //code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
-    //send test data for now
-    res.json(await db.findAll(req.body));
+    console.log(JSON.parse(req.query.search));
+    res.json(await db.findAll(JSON.parse(req.query.search)));
     res.end();
 });
 

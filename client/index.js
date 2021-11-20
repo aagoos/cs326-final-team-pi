@@ -6,9 +6,22 @@ const recipeReq = async () => {
 };
 
 async function recipeRequest() {
-    const res = await fetch("./recipes");
+    const queryJSON = JSON.stringify(await generateIngredientQuery());
+    const res = await fetch("./recipes?search="+queryJSON);
     let json =  await res.json();
-    return json.recipes;
+    return json;
+}
+
+//generate and return a mongoDB query for the current ingredient list
+async function generateIngredientQuery(){
+    let ingreds = [];
+    let ingredients = document.getElementsByClassName("ingredient");
+    ingreds.push("ham");
+    const query = {"ingredients": {"$in": ingreds}};
+    // console.log(query);
+    return query;
+
+
 }
 
 function populateRecipes(recipesArr){
@@ -58,13 +71,18 @@ function populateRecipes(recipesArr){
 }
 
 window.onload = () => {
-    recipeReq().then(data => {
-        recipes = data;
-        populateRecipes(recipes);
-    }).catch(e => console.log("failed to fetch recipes"));
-    //remove the test elements from the ingredients tab, since the buttons won't work for those
-    const container = document.getElementById("ingredients").getElementsByClassName("ingredient-list")[0];
-    container.innerHTML = '';
+    (async () => {
+        try {
+            recipes = await recipeReq();
+            populateRecipes(recipes);
+        }
+        catch(err){
+            console.log("failed to fetch recipes" + err)
+        }
+        //as a starter so something is in the display
+        addIngredient("onion", "");
+    })();
+
 };
 
 
