@@ -8,6 +8,8 @@ const client = "/../client"
 //serve client files
 app.use(express.static(__dirname + client));
 
+app.use(express.json());
+
 //semi-complete code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
     //send test data for now
@@ -29,11 +31,26 @@ app.put("/recipes", async (req, res) => {
 //placeholder for POST, which will be the create of CRUD
 app.post("/recipes", async (req, res) => {
     //dont actually modfiy the test database, dummy request for now
-    let data = {}; //processed request, dummy data
-    await db.insert(data);
+    const {body} = req;
+    if(!body.id || !body.steps && !body.ingredients || !body.name){
+        res.status(403).send('Please add all the required fields');
+        res.end();
+    }
 
-    //resond with OK
-    res.statusCode = 200;
+    const data = {
+        id: body.id,
+        name: body.name,
+        steps: body.steps,
+        ingredients: body.ingredients,
+    }
+
+    // if there are tags, it will add the tags into the data
+    if(body.tags) data.tags = body.tags;
+    // if there is imgUrl, it will add the imgUrl into the data
+    if(body.imgUrl) data.imgUrl = body.imgUrl;
+    const recipe = await db.insert(data);
+
+    res.status(200).send(recipe);
     res.end();
 });
 
