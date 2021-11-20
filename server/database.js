@@ -58,7 +58,7 @@ async function find(id){
 async function insert(data){
     const database = client.db("data");
     const Recipe = database.collection('recipes');
-    const recipe = await Recipe.insert(data);
+    const recipe = await Recipe.insertOne(data);
     return data;
 }
 
@@ -70,7 +70,9 @@ async function put(data){
 
 //delete a recipe with the specified id. Does nothing if the ID was not present.
 async function remove(id) {
-    
+    const database = client.db("data");
+    const Recipe = database.collection('recipes');
+    await Recipe.deleteOne({id});
 }
 
 //exports

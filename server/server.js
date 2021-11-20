@@ -56,9 +56,12 @@ app.post("/recipes", async (req, res) => {
 
 //placeholder for delete, which will be delete of CRUD
 app.delete("/recipes", async (req, res) => {
-    //dont actually modfiy the test database, dummy request for now
-    let id = 1; //processed request, dummy data
-    await db.remove(id);
+    const {body} = req;
+    if(!body.id){
+        res.status(403).send('ID is required.');
+    }
+
+    await db.remove(body.id);
     
     //respond with OK
     res.statusCode = 200;
