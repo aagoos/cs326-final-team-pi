@@ -2,6 +2,7 @@
 const express = require("express");
 const db = require("./database")
 const app = express();
+app.use(express.json());
 const port = 8080;
 const client = "/../client"
 
@@ -17,8 +18,8 @@ app.get("/recipes", async (req, res) => {
 
 //placeholder for PUT, which will be create and update of CRUD
 app.put("/recipes", async (req, res) => {
-    //dont actually modfiy the test database, dummy request for now
-    let data = {}; //processed request, dummy data
+
+    let data = req.body; //processed request
     await db.put(data);
     
     //respond with OK

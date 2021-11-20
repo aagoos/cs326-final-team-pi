@@ -51,6 +51,20 @@ async function insert(data){
 //be careful of ID collisions
 async function put(data){
 
+    //the entry if is present in the database already, NULL otherwise
+    const entry = await findFirst({'id': data.id});
+    const present = entry === null ? false : true;
+    const collection = client.db("data").collection("recipes");
+
+    //create if absent
+    if(!present){
+        collection.insertOne(data);
+    }
+    //update if present
+    else {
+        collection.replaceOne({"_id":entry._id}, data);
+    }
+
 }
 
 //delete a recipe with the specified id. Does nothing if the ID was not present.
