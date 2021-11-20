@@ -12,7 +12,7 @@ app.use(express.json());
 //code for GET requests to /recipes
 app.get("/recipes", async (req, res) => {
     //send test data for now
-    res.json(await db.findAll());
+    res.json(await db.findAll(req.body));
     res.end();
 });
 

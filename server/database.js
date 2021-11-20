@@ -22,10 +22,10 @@ async function addMany(){
 }
 //wrapper for CRUD stuff
 //return all recipe results which match the query
-async function findAll(){
+async function findAll(query){
     const database = client.db("data");
-    const Recipe = database.collection('recipes');
-    const recipes = await Recipe.find({}).toArray();
+    const recipe = database.collection('recipes');
+    const recipes = await recipe.find(query).toArray();
     return recipes;
 }
 
