@@ -26,4 +26,6 @@ const saveJson = () => {
     fs.writeFileSync('./parsed-recipe.json', recipeParsed);
 }
 
-saveJson();
+// saveJson();
+
+module.exports.parseRecipe = parseRecipe;

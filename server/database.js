@@ -4,14 +4,25 @@ const fs = require("fs");
 const path = require("path")
 
 const { MongoClient } = require('mongodb');
+const { parseRecipe } = require('./utilities');
 const uri = process.env.CONNECTION_URI || require(path.resolve(__dirname, "./secret.json")).key;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 start();
 
 function start(){
-    (async() => await client.connect())();
+    (async() =>{
+         await client.connect();
+        // addMany();
+        })();
 }
 
+//add test data
+async function addMany(){
+    console.log('add many');
+    const collection =  client.db("data").collection("recipes");
+    const recipes = parseRecipe();
+    await collection.insertMany(recipes);
+}
 //wrapper for CRUD stuff
 //return all recipe results which match the query
 async function findAll(query){
@@ -61,7 +72,7 @@ async function remove(id) {
 //exports
 module.exports.find = find;
 module.exports.findAll = findAll;
-module.exports.findFirst = findFirst
+module.exports.findFirst = findFirst;
 
 module.exports.insert = insert;
 module.exports.put = put;
