@@ -30,11 +30,10 @@ a:hover{
 }
 
 .content-left-image{
-    width: 100%;
     background-image: url('./healthy-recipes.jpg');
     background-size: cover;
     background-position: center;
-    height: 90%;
+    height: 85vh;
     background-repeat: no-repeat;
 }
 
@@ -59,7 +58,6 @@ a:hover{
 .recipe-detail{ /*text area*/
     padding: 20px;
     border: 1.5px solid #777;
-    padding-bottom: 100px;
     overflow-y: scroll;
     margin-right: 40px;
     margin-left: 40px;
