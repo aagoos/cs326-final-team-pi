@@ -61,7 +61,8 @@ h1{
 }
 
 .thumbnail {
-    height: 149px;
+    height: 100%;
+    object-fit: contain;
     width: auto;
     padding: 0px;
     margin: 0px;
