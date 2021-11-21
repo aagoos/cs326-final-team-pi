@@ -72,18 +72,17 @@ a{
 }
 
 .entry {
-    height: 150px;
     background-color: aliceblue;
 }
 
 .entry-body > p {
     padding: 0px;
     margin: 10px;
-    line-height: 10px;
+    line-height: 1.1;
 }
 
 .entry-body > h1 {
     padding: 0px;
     margin: 0px;
-    line-height: 15px;
+    line-height: 1.2;
 }
