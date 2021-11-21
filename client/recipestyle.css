@@ -2,8 +2,10 @@
 
 body{
     background-color:aliceblue;
-    height: 600px;
     font-family: 'Zen Kaku Gothic Antique', sans-serif;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 a{
@@ -33,7 +35,7 @@ a:hover{
     background-image: url('./healthy-recipes.jpg');
     background-size: cover;
     background-position: center;
-    height: 85vh;
+    height: 95vh;
     background-repeat: no-repeat;
 }
 
@@ -61,6 +63,7 @@ a:hover{
     overflow-y: scroll;
     margin-right: 40px;
     margin-left: 40px;
+    max-height: calc(100vh - 340px);
     background-color: white;
 }
 
