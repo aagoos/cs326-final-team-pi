@@ -1,5 +1,8 @@
 
 let recipes = [];
+let ingredientTracker = [];
+const trackerKey = "ingredientTracker";
+
 const recipeReq = async () => {
     const result = await recipeRequest();
     return result;
@@ -18,6 +21,26 @@ async function generateIngredientQuery(){
     let ingreds = [];
     let ingredients = document.getElementsByClassName("ingredient");
     for(const elem of ingredients) {
+        //exclude expired ingredients
+        const text = elem.innerText.trim().replace("+-", "").split(" ");
+        if(text.length > 1) {
+            const date = text[text.length - 1];
+            let d = Date.parse(date);
+
+            //ms in 1 day
+            const msDay = 1000 * 60 * 60 * 24;
+            const daysOld = (Date.now() - d) / msDay;
+
+            //if the date was provided, this will be a number. Otherwise, it will be NaN
+            if(!Number.isNaN(daysOld)){
+                //skip adding to the query if it is too old (> 3 weeks old)
+                if(daysOld > 21){
+                    continue;
+                }
+            }
+            //otherwise we have no date information, so just add it
+        }
+
         //custom serialization to get around JSON stringify not handling regular expressions properly
         let name = elem.firstChild.id;
         name = "[" + name.substring(0,1) + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
@@ -85,8 +108,20 @@ async function populateRecipes(recipesArr){
 window.onload = () => {
     (async () => {
         try {
-            //as a starter so something is in the display
-            addIngredient("onion", "");
+
+            if(window.localStorage.getItem(trackerKey) === null){
+                window.localStorage.setItem(trackerKey, JSON.stringify({list: []}));
+
+                //as a starter so something is in the display
+                addIngredient("onion", "");
+            }
+            else {
+                const ings = JSON.parse(window.localStorage.getItem(trackerKey));
+                for (let i = 0; i < ings.length; i++) {
+                    addIngredient(ings[i]['name'], ings[i]['date']) 
+                }
+            }
+
 
             recipes = await recipeReq();
             await populateRecipes(recipes);
@@ -119,6 +154,10 @@ function addIngredient(name, date) {
 
     container.appendChild(ingredient);
 
+    //add it to the ingredientTracker
+    ingredientTracker.push({"name": name, "date":date, "text": nameField.innerText});
+    window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+
     //repopuluate
     (async () => {
         recipes = await recipeReq();
@@ -149,6 +188,10 @@ function appendIngredientButtons(elem, container){
         deleteButton.addEventListener("click", () => {
             container.removeChild(elem);
 
+            //update the ingredient tracker
+            ingredientTracker = ingredientTracker.filter(e => e.text !== elem.innerText.replace("+-", ""));
+            window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+
             //repopuluate
             (async () => {
                 recipes = await recipeReq();
@@ -166,12 +209,24 @@ function updateIngredient(elem, container){
     const name = document.getElementById("ingredient-name").value;
     const date = datepicker.value;
 
-    elem.id = name;
-    elem.innerText = name + " " + date;
-    appendIngredientButtons(elem, container);
+    //remove old item from the tracker
+    ingredientTracker = ingredientTracker.filter(e => e.text !== elem.firstChild.innerText.replace("+-",""));
+
+    elem.innerHTML = '';
+
+    let span = document.createElement("span");
+
+    span.id = name;
+    span.innerText = name + " " + date;
+    elem.appendChild(span);
 
     //repopuluate
     (async () => {
+           //update the ingredientTracker
+        ingredientTracker.push({"name": name, "date":date, "text": elem.firstChild.innerText});
+        window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+        appendIngredientButtons(elem, container);
+
         recipes = await recipeReq();
         await populateRecipes(recipes);
     })()
