@@ -16,7 +16,7 @@ const domHandler = async () => {
 
 // waits until we get recipe data response from server
 const recipeData = await getRecipeData();
-console.log(recipeData);
+
 //DOM elements
 const recipeNameSection = document.getElementById('recipe-name');
 const recipeDetails = document.getElementById('recipe-details');
@@ -53,7 +53,6 @@ function updateRecipe(){
     // gets active recipe using ID
     (async() => {
         const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
-        console.log(recipe)
         // checks if recipe exists
         if(recipe){
             // destructure recipe property values
