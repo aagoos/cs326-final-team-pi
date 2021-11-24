@@ -68,7 +68,7 @@ async function populateRecipes(recipesArr){
         const imgCol = document.createElement("div");
         imgCol.classList.add("col-md-4");
         //alter this depending on json format
-        imgCol.innerHTML = `<img alt="burgah" class="img-fluid rounded-start thumbnail" src="https://static01.nyt.com/images/2021/05/17/dining/kc-korean-bulgogi-burger/kc-korean-bulgogi-burger-mobileMasterAt3x.jpg">`;
+        imgCol.innerHTML = `<img alt="burgah" class="img-fluid rounded-start thumbnail" src="${recipe.imgUrl}">`;
 
         const recipeCol = document.createElement("div");
         recipeCol.classList.add("col-md-8");
