@@ -1,5 +1,8 @@
 
 let recipes = [];
+let ingredientTracker = [];
+const trackerKey = "ingredientTracker";
+
 const recipeReq = async () => {
     const result = await recipeRequest();
     return result;
@@ -8,7 +11,6 @@ const recipeReq = async () => {
 async function recipeRequest() {
 
     const queryJSON = JSON.stringify(await generateIngredientQuery());
-    console.log(queryJSON)
     const res = await fetch("./recipes?search="+queryJSON);
     let json =  await res.json();
     return json;
@@ -106,8 +108,20 @@ async function populateRecipes(recipesArr){
 window.onload = () => {
     (async () => {
         try {
-            //as a starter so something is in the display
-            addIngredient("onion", "");
+
+            if(window.localStorage.getItem(trackerKey) === null){
+                window.localStorage.setItem(trackerKey, JSON.stringify({list: []}));
+
+                //as a starter so something is in the display
+                addIngredient("onion", "");
+            }
+            else {
+                const ings = JSON.parse(window.localStorage.getItem(trackerKey));
+                for (let i = 0; i < ings.length; i++) {
+                    addIngredient(ings[i]['name'], ings[i]['date']) 
+                }
+            }
+
 
             recipes = await recipeReq();
             await populateRecipes(recipes);
@@ -140,6 +154,10 @@ function addIngredient(name, date) {
 
     container.appendChild(ingredient);
 
+    //add it to the ingredientTracker
+    ingredientTracker.push({"name": name, "date":date, "text": nameField.innerText});
+    window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+
     //repopuluate
     (async () => {
         recipes = await recipeReq();
@@ -170,6 +188,10 @@ function appendIngredientButtons(elem, container){
         deleteButton.addEventListener("click", () => {
             container.removeChild(elem);
 
+            //update the ingredient tracker
+            ingredientTracker = ingredientTracker.filter(e => e.text !== elem.innerText.replace("+-", ""));
+            window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+
             //repopuluate
             (async () => {
                 recipes = await recipeReq();
@@ -187,12 +209,24 @@ function updateIngredient(elem, container){
     const name = document.getElementById("ingredient-name").value;
     const date = datepicker.value;
 
-    elem.id = name;
-    elem.innerText = name + " " + date;
-    appendIngredientButtons(elem, container);
+    //remove old item from the tracker
+    ingredientTracker = ingredientTracker.filter(e => e.text !== elem.firstChild.innerText.replace("+-",""));
+
+    elem.innerHTML = '';
+
+    let span = document.createElement("span");
+
+    span.id = name;
+    span.innerText = name + " " + date;
+    elem.appendChild(span);
 
     //repopuluate
     (async () => {
+           //update the ingredientTracker
+        ingredientTracker.push({"name": name, "date":date, "text": elem.firstChild.innerText});
+        window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+        appendIngredientButtons(elem, container);
+
         recipes = await recipeReq();
         await populateRecipes(recipes);
     })()
