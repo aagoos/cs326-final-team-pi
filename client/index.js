@@ -8,6 +8,7 @@ const recipeReq = async () => {
 async function recipeRequest() {
 
     const queryJSON = JSON.stringify(await generateIngredientQuery());
+    console.log(queryJSON)
     const res = await fetch("./recipes?search="+queryJSON);
     let json =  await res.json();
     return json;
@@ -18,6 +19,26 @@ async function generateIngredientQuery(){
     let ingreds = [];
     let ingredients = document.getElementsByClassName("ingredient");
     for(const elem of ingredients) {
+        //exclude expired ingredients
+        const text = elem.innerText.trim().replace("+-", "").split(" ");
+        if(text.length > 1) {
+            const date = text[text.length - 1];
+            let d = Date.parse(date);
+
+            //ms in 1 day
+            const msDay = 1000 * 60 * 60 * 24;
+            const daysOld = (Date.now() - d) / msDay;
+
+            //if the date was provided, this will be a number. Otherwise, it will be NaN
+            if(!Number.isNaN(daysOld)){
+                //skip adding to the query if it is too old (> 3 weeks old)
+                if(daysOld > 21){
+                    continue;
+                }
+            }
+            //otherwise we have no date information, so just add it
+        }
+
         //custom serialization to get around JSON stringify not handling regular expressions properly
         let name = elem.firstChild.id;
         name = "[" + name.substring(0,1) + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
