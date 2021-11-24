@@ -57,7 +57,7 @@ function updateRecipe(){
         // checks if recipe exists
         if(recipe){
             // destructure recipe property values
-            const {ingredients, tags, steps, title: name}= recipe;
+            const {ingredients, tags, steps, title: name, imgUrl}= recipe;
             // updates recipe title
             recipeNameSection.querySelector('.recipe-subheading').textContent = name;
             // select recipe tags container
@@ -68,6 +68,9 @@ function updateRecipe(){
             }).join(' ');
             // replace inner HTML with our dynamic HTML
             tagsDom.innerHTML = tagsHTMLTemplate;
+            if(imgUrl){
+                document.querySelector('.content-left-image').style.backgroundImage = `url(${imgUrl})`;
+            }
             updateDetails(steps, 'step');
         }
     })();
