@@ -21,7 +21,9 @@ app.get("/recipes", async (req, res) => {
         }
         return result;
     }
-    const query = JSON.parse(req.query.search, reviver);
+    //in case search is empty, save it to empty object JSON
+    const search = req.query.search || '{}' 
+    const query = JSON.parse(search, reviver);
 
     res.json(await db.findAll(query));
     res.end();
