@@ -43,7 +43,7 @@ async function generateIngredientQuery(){
 
         //custom serialization to get around JSON stringify not handling regular expressions properly
         let name = elem.firstChild.id;
-        name = "[" + name.substring(0,1) + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
+        name = "[" + name.substring(0,1).toLowerCase() + "|" + name.substring(0,1).toUpperCase() + "]" + name.substring(1);
         ingreds.push("__REGEX__" + new RegExp(name).toString() + "__REGEX__"); 
     }
     const query = {"ingredients": {"$all": ingreds}};
