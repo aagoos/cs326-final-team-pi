@@ -32,7 +32,6 @@ a:hover{
 }
 
 .content-left-image{
-    background-image: url('./healthy-recipes.jpg');
     background-size: cover;
     background-position: center;
     height: 80vh; /*image height*/
