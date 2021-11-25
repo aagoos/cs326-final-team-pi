@@ -17,7 +17,7 @@ Megan Lew (lewmeg)
 
 Image of the home page.
 
-Users can add ingredients by filling in the textbox and optionally choosing a date. Clicking the (+) icon will add the ingredient. Clicking the small + icon will instead update the selected ingredient with the current name and date values.
+Users can add ingredients by filling in the textbox and optionally choosing a date. Clicking the (+) icon will add the ingredient. Clicking the small + icon will instead update the selected ingredient with the current name and date values. Clicking the - icon will remove the ingredient from the iPantry. Clicking the link on each recipe will bring you to the recipe page and load that recipe.
 !["image of index page"](final_Index.PNG)
 
 Image of the recipe page, ingredient tab selected. The user can read the ingredients needed for the recipe while the ingredient tab is selected.
@@ -100,3 +100,47 @@ Example DELETE request: `curl -d '{"id": 5}' -H 'Content-Type: application/json'
 
 Example response: 
 HTTP 200: OK
+
+# Database
+
+The database is used to hold recipes, and to respond to API requests. It is a MongoDB atlas database. The database has one database, named `data`. There is one collection, named `recipes`. Each document in the `recipes` collection represents an individual recipe.
+
+# URL Routes / Mapping
+
+Get requests made to the root directory are mapped to the /client folder.
+
+# Authentication/Authorization
+
+All users have access to the home and recipe page. The ingredients a user has are tracked locally, so an account is not required to access any part of the site.
+
+# Division of labor
+
+## Alex
+
+Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css.
+
+## Megan
+
+# Conclusion
+
+## Alex
+
+### Design
+
+The design process was novel. When working alone, I have no one else to discuss design related ideas with, and having a team to bounce ideas off of overall I feel lead to a much better interface than I could have produced alone. 
+
+### Challenges
+
+Learning to work with HTML/CSS was hard for me, as I am much more comfortable with backend code than frontend / design oriented things. I did improve my HTML/CSS skills significantly however. Also, learning how to handle async code in node.js was somewhat unintuitive and took a while to get the hang of (at least enough to get the site working). As my experience with javascript is limited, I ran into a few javascript quirks that took me a long time to solve (who knew JSON.stringify replaced RegExp objects with {}? I didn't). Overall, I was able to overcome these challenges and become a better programmer.
+
+### If I could start over...
+
+If I knew going in how much actual in code processing of ingredients would be needed, I probably would have managed them differently. Currently it is tightly connected to the HTML, but it would have been better to store the ingredients internally, instead of having to extract them from HTML elements when they are needed for processing.
+
+## Megan
+
+### Design
+
+### Challenges
+
+### If I could start over...
