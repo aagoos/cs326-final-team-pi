@@ -23,6 +23,34 @@ Example document
 
 ```
 
+## _id 
+
+Assigned by mongoDB
+
+## id
+
+The id assigned by us to each recipe
+
+## title
+
+The name of the recipe
+
+## steps
+
+The steps in order to complete a recipe
+
+## ingredients
+
+The ingredients / quantity of each ingredient in the recipe
+
+## tags
+
+Metadata related to the recipe's (both content and in general)
+
+## imgUrl
+
+A link to an image of this recipe, if one exists. May not be present.
+
 # Contributions
 
 ## Alex 
