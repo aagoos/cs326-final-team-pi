@@ -22,26 +22,25 @@ Example response:
 ```
 
 ## /recipes GET
-Returns the all the recipes which match certain the query
+Returns the all the recipes which match the query. The query uses the mongoDB syntax. Use double quotes.
 
-Example GET request: `curl localhost:8080/recipes?contains=bread`
+Example GET request: `curl localhost:8080/recipes?search={"id":15}`
 Example response: 
 ```json
 {
-    "recipes": [
+    [
         {
-            "id":0,
-            "title":"ham + cheese = genius?",
-            "ingredients":["ham","cheese","bread"],
-            "steps":
-            [
-                "put da ham on da bread",
-                "put da cheese on the ham and bread",
-                "close ur sammich with more breadz"
+            "_id":"61983f821023b78cdcec11bb",
+            "id":15,
+            "title":"Spicy Rice Casserole",
+            "steps":[
+                "Preheat oven to 425 degrees","Mix rice, oats, onion, bread crumbs, milk, basil, oregano, cayenne, and egg","  Press mixture into small baking dish","  Mix panko and parmesan, put on top of mixture","  Bake for 20 minutes or until crispy or browned","  (If topping starts browning too soon, cover loosely with aluminum foil",")Serve with marinara sauce"
             ],
-        "tags":["dairy","wheat","gluten"]
+            "ingredients":[
+                "2 cup cooked rice","1/2 cup quick-cooking oats","1/2 cup onion, chopped","1/4 cup panko","1/4 cup milk","1 tbsp italian seasoning","1/8 tsp cayenne pepper","1 large egg, beaten","1/2 cup panko","1/4 cup parmesan cheese","4 serving [marinara sauce](http://www.xanthir.com/recipes/showrecipe.php?id=id34)"
+            ],
+            "tags":["vegetarian","rice","main"]
         }
-    /*... more entries ...*/
     ]
 }
 ```
