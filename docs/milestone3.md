@@ -56,3 +56,7 @@ A link to an image of this recipe, if one exists. May not be present.
 ## Alex 
 
 Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured mongodb, worked on documentation, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan).
+
+## Megan
+
+Converted recipe data into appropriate JSON format, implemented findAll and findFirst in database.js, implemented POST and DELETE in server.js, fixed image scaling and scrolling on the recipe page, fixed line overlapping issue on the home page, other bug fixes, made the recipe image on the home page and recipe page uniform, hand-selected a number of recipe images.
