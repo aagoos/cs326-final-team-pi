@@ -147,6 +147,12 @@ function addIngredient(name, date) {
     nameField.id = name;
     nameField.innerText = name + " " + date;
 
+    //if name is empty terminate and alert user
+    if(name === ''){
+        alert("Must specify an ingredient name");
+        return;
+    }
+
     ingredient.appendChild(nameField);
 
     //append update and delete buttons
