@@ -15,18 +15,13 @@ const getRecipeData = async(id) => {
 const domHandler = async () => {
 
 // waits until we get recipe data response from server
-const recipeData = await getRecipeData();
+let recipeData = await getRecipeData(window.localStorage.getItem('lastClicked'));
 
 //DOM elements
 const recipeNameSection = document.getElementById('recipe-name');
 const recipeDetails = document.getElementById('recipe-details');
 const ingredientsTab = document.getElementById('ingredient-tab');
 const instructionsTab = document.getElementById('instruction-tab');
-
-// function to get the active recipe by ID
-async function getActiveRecipe(id){
-    return await getRecipeData(id);
-}
 
 // function to update instructions or ingredients area
 const updateDetails = (details, type) => {
@@ -52,7 +47,7 @@ const updateDetails = (details, type) => {
 function updateRecipe(){
     // gets active recipe using ID
     (async() => {
-        const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
+        const recipe = recipeData;
         // checks if recipe exists
         if(recipe){
             // destructure recipe property values
@@ -75,11 +70,9 @@ function updateRecipe(){
     })();
 }
 
-getRecipeData();
-
 // when user clicks ingredients tab it becomes active
 ingredientsTab.addEventListener('click', async () => {
-    const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
+    const recipe = recipeData;
     if(recipe){
         const { ingredients } = recipe;
         updateDetails(ingredients, 'ingredient');
@@ -88,7 +81,7 @@ ingredientsTab.addEventListener('click', async () => {
 
 // when user clicks instructions tab it becomes active
 instructionsTab.addEventListener('click', async () => {
-    const recipe = await getActiveRecipe(window.localStorage.getItem('lastClicked'));
+    const recipe = recipeData;
 
     if(recipe){
         const { steps } = recipe;
