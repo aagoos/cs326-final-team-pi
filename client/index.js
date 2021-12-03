@@ -107,7 +107,10 @@ async function populateRecipes(recipesArr){
 
 window.onload = () => {
     //set the date to today
-    //document.getElementById("date-picker"); //TODO finsih this
+    const today = new Date();
+    const theDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    //YYYY-MM-DD
+    document.getElementById("date-picker").value = theDate; 
 
     (async () => {
         try {
