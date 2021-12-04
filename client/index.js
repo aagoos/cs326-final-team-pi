@@ -22,7 +22,7 @@ async function generateIngredientQuery(){
     let ingredients = document.getElementsByClassName("ingredient");
     for(const elem of ingredients) {
         //exclude expired ingredients
-        const text = elem.innerText.trim().replace("+-", "").split(" ");
+        const text = elem.innerText.trim().replace("+-", "").split("\s+");
         if(text.length > 1) {
             const date = text[text.length - 1];
             let d = Date.parse(date);
@@ -106,6 +106,12 @@ async function populateRecipes(recipesArr){
 }
 
 window.onload = () => {
+    //set the date to today
+    const today = new Date();
+    const theDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    //YYYY-MM-DD
+    document.getElementById("date-picker").value = theDate; 
+
     (async () => {
         try {
 
@@ -147,6 +153,12 @@ function addIngredient(name, date) {
     nameField.id = name;
     nameField.innerText = name + " " + date;
 
+    //if name is empty terminate and alert user
+    if(name === ''){
+        alert("Must specify an ingredient name");
+        return;
+    }
+
     ingredient.appendChild(nameField);
 
     //append update and delete buttons
@@ -186,11 +198,14 @@ function appendIngredientButtons(elem, container){
     
          //add the listener for the delete button
         deleteButton.addEventListener("click", () => {
-            container.removeChild(elem);
 
             //update the ingredient tracker
-            ingredientTracker = ingredientTracker.filter(e => e.text !== elem.innerText.replace("+-", ""));
+            ingredientTracker = ingredientTracker.filter(e => e.text.trim() !== elem.innerText.replace("+-", "").trim());
+            console.log("hello? " + elem.innerText);
             window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
+
+            container.removeChild(elem);
+
 
             //repopuluate
             (async () => {
