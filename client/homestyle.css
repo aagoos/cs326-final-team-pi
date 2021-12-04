@@ -1,13 +1,13 @@
-body{
+body {
     font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 
-.title-bar{
+.title-bar {
     background-color: lightblue;
     color: aliceblue;
 }
 
-h1{
+h1 {
     padding-left: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -24,7 +24,7 @@ h1{
     overflow: hidden;
 }
 
-.add-ingredient{
+.add-ingredient {
     border: 2px darkgray solid;
     color: darkgray;
     text-align: center;
@@ -32,12 +32,12 @@ h1{
     font-size: 20px;
 }
 
-.add-ingredient:hover{
+.add-ingredient:hover {
     border: 2px lightblue solid;
     color: lightblue;
 }
 
-.update-ingredient{
+.update-ingredient {
     border: none;
     background-color: white;
     color: darkgray;
@@ -45,15 +45,15 @@ h1{
     font-size: 15px;
 }
 
-.update-ingredient:hover{
+.update-ingredient:hover {
     color: lightblue;
 }
 
-.filters .row{
+.filters .row {
    background-color: aliceblue;
 }
 
-.filters .col{
+.filters .col {
     border-left: 1px gray dashed;
     border-right: 1px gray dashed;
     border-top: 1px gray solid;
@@ -68,7 +68,7 @@ h1{
     margin: 0px;
 }
 
-a{
+a {
     color: teal;
 }
 
@@ -86,4 +86,8 @@ a{
     padding: 0px;
     margin: 0px;
     line-height: 1.2;
+}
+
+.date-picker-control {
+    font-size: 14px;
 }
