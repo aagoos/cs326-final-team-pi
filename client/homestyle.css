@@ -7,6 +7,25 @@ body {
     color: aliceblue;
 }
 
+#left-side-bar {
+    background-image: url('./texture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: max-content;
+    min-height: calc(100vh - 60px);
+    padding: 5px;
+    padding-top: 10px;
+}
+
+.ingredient-list{
+    background-color: #fff;
+    margin: 20px 0;
+}
+
+.date-picker-control label{
+    color: #fff;
+}
 
 h1 {
     padding-left: 50px;
