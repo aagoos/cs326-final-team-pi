@@ -1,0 +1,27 @@
+#homelink{
+    text-decoration: none;
+    color: aliceblue;
+}
+
+#input-area{
+    width: 8em;
+    margin: auto;
+}
+
+html {
+    background-color: rgb(200, 222, 230);
+}
+
+.main-container {
+    background-color: rgb(200, 222, 230);
+}
+
+.title-bar {
+    background-color: lightblue;
+    color: aliceblue;
+}
+
+#inner-area {
+    background-color: whitesmoke;
+    border-radius: 25px;
+}
