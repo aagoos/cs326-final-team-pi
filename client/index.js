@@ -231,7 +231,7 @@ function addIngredient(name, date) {
     //repopuluate
     (async () => {
         recipes = await recipeReq();
-        await populateRecipes(recipes);
+        sortFavorites();
     })()
 }
 
@@ -267,7 +267,7 @@ function appendIngredientButtons(elem, container){
             //repopuluate
             (async () => {
                 recipes = await recipeReq();
-                await populateRecipes(recipes);
+                sortFavorites();
             })()
         })
     
@@ -300,7 +300,7 @@ function updateIngredient(elem, container){
         appendIngredientButtons(elem, container);
 
         recipes = await recipeReq();
-        await populateRecipes(recipes);
+        sortFavorites();
     })()
 }
 
