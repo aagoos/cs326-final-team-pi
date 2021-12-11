@@ -15,7 +15,10 @@ html {
 }
 
 button, input, optgroup, select, textarea {
-    margin: 15px;
+    margin: 20px;
+    background-color: aliceblue;
+    border: none;
+    color: teal;
 }
 
 .main-container {
@@ -28,10 +31,12 @@ button, input, optgroup, select, textarea {
 }
 
 #inner-area {
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
+    background-color: lightblue;
     border-radius: 25px;
     padding: 30px;
     width: 300px;
+    color: white;
 }
 
 .hidden {
