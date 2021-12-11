@@ -10,8 +10,6 @@ body {
 #left-side-bar {
     background-image: url('./shelf.jpg');
     background-size: 100%;
-    /* background-position: center; */
-    /* background-repeat: no-repeat; */
     height: max-content;
     min-height: calc(100vh - 60px);
     padding: 5px;

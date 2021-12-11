@@ -141,6 +141,12 @@ If I knew going in how much actual in code processing of ingredients would be ne
 
 ### Design
 
+As for what I have learned through the design and implementation process, I have learned how to create a clean HTML, CSS layout, manipulate the DOM, make fetch requests using JavaScript and how to create a dynamic web page. I understand now how the client communicates with the server and how to create and manage a database, and how the server acts as a middleware between the client and database. I also learned how to make CRUD API using node.js, express and mongodb.
+
 ### Challenges
 
+Some challenges for me were writing back-end APIs, parsing the client data and validating it before making a database query. On the client side, updating the home page and recipe page dynamically and also manipulating the DOM while maintaining the styling and DOM structure was challenging as well. It was difficult to get certain aspects of the design to look the way we wanted. For example, the pantry background on the home page was initially blurry, cut off on the sides and would zoom in when the content overflowed. However, after some tweaking I figured out how to fix these issues.
+
 ### If I could start over...
+
+For front-end design, I would learn responsive design, i.e. having a fitted screen and scaling the page without anything getting cropped, which would give a better user experience for all media screens. For back-end design, I would use unit testing for back-end APIs and integrate the unit test to GitHub so the production application will not break if there are any errors. Generally, I would learn how to manage and architecture my project so that it will be easy to maintain and scale. I would either figure out a better way to generate images for the recipe data instead of finding and adding them all manually or look more extensively for a database that matches our recipe format.
