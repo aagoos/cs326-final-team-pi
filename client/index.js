@@ -20,6 +20,13 @@ async function recipeRequest() {
 async function generateIngredientQuery(){
     let ingreds = [];
     let ingredients = document.getElementsByClassName("ingredient");
+
+    //if no ingredients, display all
+    if(ingredients.length === 0){
+        return {};
+    }
+
+
     for(const elem of ingredients) {
         //exclude expired ingredients
         const text = elem.innerText.trim().replace("+-", "").split("\s+");
@@ -117,9 +124,6 @@ window.onload = () => {
 
             if(window.localStorage.getItem(trackerKey) === null){
                 window.localStorage.setItem(trackerKey, JSON.stringify({list: []}));
-
-                //as a starter so something is in the display
-                addIngredient("onion", "");
             }
             else {
                 const ings = JSON.parse(window.localStorage.getItem(trackerKey));
@@ -134,6 +138,17 @@ window.onload = () => {
         }
         catch(err){
             console.log("failed to fetch recipes" + err)
+        }
+
+        //set the username
+        const response = await fetch("./user");
+        if(response.status === 200){
+            //display the username instead of log in
+            const json =  await response.json();
+            document.getElementById("login-text").innerText = "Signed in as: " + json['user'];
+
+            //kill the link to the login page.
+            document.getElementById("login-link").setAttribute('href', '#!');
         }
     })();
 
