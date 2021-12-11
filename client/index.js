@@ -162,20 +162,7 @@ window.onload = () => {
         if(response.status === 200){
             //display the username instead of log in
             const json =  await response.json();
-            const loginText = document.getElementById("login-text");
-            loginText.innerText = "Signed in as: " + json['user'];
-
-            //logout button
-            const logout = document.createElement('img');
-            logout.setAttribute('src', './logout.png');
-            logout.setAttribute('alt', 'log out button');
-            logout.setAttribute('height', '40px');
-            logout.setAttribute('width', '40px');
-            logout.addEventListener('click', async () => {
-                await fetch("./logout");
-                location.reload();
-            });
-            loginText.append(logout)
+            document.getElementById("login-text").innerText = "Signed in as: " + json['user'];
 
             //kill the link to the login page.
             document.getElementById("login-link").setAttribute('href', '#!');

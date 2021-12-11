@@ -4,12 +4,18 @@
 }
 
 #input-area{
-    width: 8em;
-    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 html {
     background-color: rgb(200, 222, 230);
+}
+
+button, input, optgroup, select, textarea {
+    margin: 15px;
 }
 
 .main-container {
@@ -24,12 +30,23 @@ html {
 #inner-area {
     background-color: whitesmoke;
     border-radius: 25px;
+    padding: 30px;
+    width: 300px;
 }
 
 .hidden {
-    opacity: 0;
+    display: none;
 }
 
 .error {
     color: darkred;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: white;
 }
