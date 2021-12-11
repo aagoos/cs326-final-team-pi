@@ -8,10 +8,8 @@ body {
 }
 
 #left-side-bar {
-    background-image: url('./shelf.jpg');
-    background-size: 100%;
-    height: max-content;
-    min-height: calc(100vh - 60px);
+    background: url('./shelf.jpg') repeat-y;
+    
     padding: 5px;
     padding-top: 10px;
 
