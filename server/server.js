@@ -24,7 +24,7 @@ const strategy = new LocalStrategy(
 
 //setup passport
 const key = process.env.SESSION_KEY || require(path.resolve(__dirname, "./secret.json")).key2;
-app.use(expSession({secret: key}));
+app.use(expSession({secret: key,  saveUninitialized: true, resave: true}));
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
