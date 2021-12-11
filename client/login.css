@@ -44,9 +44,9 @@ button, input, optgroup, select, textarea {
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 a:hover {
-    color: white;
+    color: teal;
 }
