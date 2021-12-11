@@ -1,10 +1,36 @@
 'use strict'
-const e = require("express");
 const express = require("express");
 const db = require("./database")
+const passport = require("passport");
+const LocalStrategy = require('passport-local').Strategy;
+const expSession = require('express-session');
+const path = require("path");
+
+
 const app = express();
 const port = 8080;
 const client = "/../client"
+
+const strategy = new LocalStrategy(
+    async (username, password, done) => {
+        const success = await db.auth(username, password);
+	    if (!success) {
+	        await new Promise((x) => setTimeout(x, 2000));
+	        return done(null, false, {'message' : 'Username or password incorrect'});
+	    }
+	    return done(null, username);
+    }
+);
+
+//setup passport
+const key = process.env.SESSION_KEY || require(path.resolve(__dirname, "./secret.json")).key2;
+app.use(expSession({secret: key}));
+passport.use(strategy);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((uid, done) => done(null, uid));
 
 //serve client files
 app.use(express.static(__dirname + client));
@@ -28,6 +54,55 @@ app.get("/recipes", async (req, res) => {
     res.json(await db.findAll(query));
     res.end();
 });
+
+//return the users favorites iff logged in
+app.get('/favorites', async (req, res) => {
+    if(req.isAuthenticated()) {
+        res.json(await db.getFavorites(req.user.username))
+    }
+})
+
+//update the users favorites iff logged in
+app.post('/favorites', async (req, res) => {
+    if(req.isAuthenticated()){
+        await db.setFavorites(req.user, req.body.favorites);
+        res.statusCode = 200;
+    }
+    else{
+        res.statusCode = 403;
+    }
+    res.end();
+
+
+})
+
+//returns the name of the user currently logged in, if they are authenticated
+app.get('/user', (req, res) => {
+    if(req.isAuthenticated()){
+        res.json({'user': req.user})
+        res.statusCode = 200;
+    }
+    else {
+        res.statusCode = 403;
+    }
+    res.end();
+})
+
+//login and register endpoints
+app.post('/login', passport.authenticate('local', { successRedirect: '/index.html', failureRedirect: '/login' }));
+
+app.post('/register', async (req, res) => {
+    const {body} = req;
+    const success = await db.createUser(body.username, body.password);
+    if(success){
+        res.statusCode = 200;
+    }
+    else{
+        res.statusCode = 409;
+        res.statusMessage = "Username already in use."
+    }
+    res.end();
+})
 
 //for PUT, which will be create and update of CRUD
 app.put("/recipes", async (req, res) => {

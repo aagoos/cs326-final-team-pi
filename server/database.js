@@ -5,8 +5,11 @@ const path = require("path")
 
 const { MongoClient } = require('mongodb');
 const { parseRecipe } = require('./utilities');
+const miniCrypt = require("./miniCrypt");
+const passport = require("passport");
 const uri = process.env.CONNECTION_URI || require(path.resolve(__dirname, "./secret.json")).key;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 start();
 
 function start(){
@@ -85,6 +88,71 @@ async function remove(id) {
     await Recipe.deleteOne({'id': id});
 }
 
+//checks a username and password against the database. If the user should be authenticated, return true, otherwise false.
+async function auth(username, password) {
+
+    const m = new miniCrypt();
+
+    //get the user
+    const database = client.db("data");
+    const users = database.collection('users');
+    const user = await users.findOne({'username': username});
+
+    //if the user does not exist, fail
+    if(user === null){
+        return false;
+    }
+
+    //authenticate
+    return m.check(password, user['salt'], user['hash']);
+}
+
+//creates a username and password in the database. If the user was created return true, otherwise (if duplicate username) false.
+async function createUser(username, password) {
+
+    const m = new miniCrypt();
+
+    //get the user
+    const database = client.db("data");
+    const users = database.collection('users');
+    const user = await users.findOne({'username': username});
+
+    //if the user already exists, fail
+    if(user !== null){
+        return false;
+    }
+
+    //create the account
+    const crypt = m.hash(password);
+    const salt = crypt[0];
+    const hash = crypt[1];
+    await users.insertOne({'username': username, 'hash': hash, 'salt':salt, favorites: []});
+    return true;
+}
+
+//returns the favorites for a user. IMPORTANT: Does not check authentication, do that before calling this function.
+async function getFavorites(username){
+    const database = client.db("data");
+    const users = database.collection('users');
+    const user = users.findOne(username);
+    if(user === null){
+        return []; //the user does not exist
+    }
+    else {
+        return user['favorites'];
+    }
+}
+
+//updates the favorites for a user. IMPORTANT: Does not check authentication, do that before calling this function.
+async function setFavorites(username, favorites){
+    const database = client.db("data");
+    const users = database.collection('users');
+    const user = users.findOne(username);
+    if(user !== null){
+        user['favorites'] = favorites;
+    }
+}
+
 //exports
 module.exports.find = find;
 module.exports.findAll = findAll;
@@ -93,3 +161,10 @@ module.exports.findFirst = findFirst;
 module.exports.insert = insert;
 module.exports.put = put;
 module.exports.remove = remove;
+
+module.exports.auth = auth;
+module.exports.createUser = createUser;
+module.exports.getFavorites = getFavorites;
+module.exports.setFavorites = setFavorites;
+
+
