@@ -89,8 +89,15 @@ app.get('/user', (req, res) => {
     res.end();
 })
 
-//login and register endpoints
+//login, logout, and register endpoints
 app.post('/login', passport.authenticate('local', { successRedirect: '/index.html', failureRedirect: '/login' }));
+
+app.get("/logout", async (req, res) => {
+    req.session.destroy((err) => {
+        //redirect home
+        res.redirect("./index.html");
+    });
+});
 
 app.post('/register', async (req, res) => {
     const {body} = req;
