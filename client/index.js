@@ -121,9 +121,7 @@ async function populateRecipes(recipesArr){
             //remove/add this as a favorite
 
             //remove
-            console.log(document.getElementById(imgId).getAttribute('src'));
             if(document.getElementById(imgId).getAttribute('src') === "./fav.png"){
-                console.log("hello?")
                 img.setAttribute('src', "notfav.png");
                 if(favorites.length === 1){
                     favorites = [];
