@@ -25,3 +25,11 @@ html {
     background-color: whitesmoke;
     border-radius: 25px;
 }
+
+.hidden {
+    opacity: 0;
+}
+
+.error {
+    color: darkred;
+}

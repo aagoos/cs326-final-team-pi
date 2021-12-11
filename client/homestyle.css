@@ -112,3 +112,22 @@ a {
 .date-picker-control {
     font-size: 14px;
 }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.login {
+    padding-right: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#login-link{
+    text-decoration: none;
+    color: aliceblue;
+}
