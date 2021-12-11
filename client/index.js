@@ -136,7 +136,6 @@ async function populateRecipes(recipesArr){
                 img.setAttribute('src', "fav.png");
                 favorites.push(recipe.id);
             }
-            console.log(favorites)
 
             //update the users favs
             await fetch('./favorites', {
