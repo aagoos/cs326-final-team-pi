@@ -1,5 +1,6 @@
 
 let recipes = [];
+let favorites = [];
 let ingredientTracker = [];
 const trackerKey = "ingredientTracker";
 
@@ -85,6 +86,9 @@ async function populateRecipes(recipesArr){
         entryBody.classList.add("entry-body");
         entryBody.id = recipe.id;
 
+        const favIconPath = favorites.indexOf(recipe.id) >= 0 ? "./fav.png" : "./notfav.png";
+
+        entryBody.innerHTML += `<img id=${recipe.id}-icon src=${favIconPath} alt="favorite" width="40" height="40"></img>`;
         entryBody.innerHTML += `<a href="./recipe.html"><h5 class="card-title" id="result1-name"> ${recipe.title} </h5></a>`;
         if(recipe.steps.length > 2){
             entryBody.innerHTML += `<p class="card-text">Step 1: ${recipe.steps[0]} </p>`;
@@ -109,6 +113,42 @@ async function populateRecipes(recipesArr){
         })
 
         container.appendChild(entry);
+
+        //add a listener for the favorites
+        const imgId = `${recipe.id}-icon`;
+        const img = document.getElementById(imgId);
+        img.addEventListener('click', async () => {
+            //remove/add this as a favorite
+
+            //remove
+            console.log(document.getElementById(imgId).getAttribute('src'));
+            if(document.getElementById(imgId).getAttribute('src') === "./fav.png"){
+                console.log("hello?")
+                img.setAttribute('src', "notfav.png");
+                if(favorites.length === 1){
+                    favorites = [];
+                }
+                else{
+                    favorites = favorites.splice(favorites.indexOf(recipe.id), 1);
+                }
+            }
+            else{ //add
+                img.setAttribute('src', "fav.png");
+                favorites.push(recipe.id);
+            }
+            console.log(favorites)
+
+            //update the users favs
+            await fetch('./favorites', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'favorites': favorites})
+            });
+            sortFavorites();
+        })
     }
 }
 
@@ -120,6 +160,24 @@ window.onload = () => {
     document.getElementById("date-picker").value = theDate; 
 
     (async () => {
+        //set the username
+        const response = await fetch("./user");
+        if(response.status === 200){
+            //display the username instead of log in
+            const json =  await response.json();
+            document.getElementById("login-text").innerText = "Signed in as: " + json['user'];
+
+            //kill the link to the login page.
+            document.getElementById("login-link").setAttribute('href', '#!');
+
+            //load favorites
+            const favRes = await fetch("./favorites");
+            if(favRes.status = 200) {
+                const favJson = await favRes.json();
+                favorites = favJson['favorites'];
+            }
+        }
+        
         try {
 
             if(window.localStorage.getItem(trackerKey) === null){
@@ -132,23 +190,11 @@ window.onload = () => {
                 }
             }
 
-
             recipes = await recipeReq();
-            await populateRecipes(recipes);
+            sortFavorites();
         }
         catch(err){
             console.log("failed to fetch recipes" + err)
-        }
-
-        //set the username
-        const response = await fetch("./user");
-        if(response.status === 200){
-            //display the username instead of log in
-            const json =  await response.json();
-            document.getElementById("login-text").innerText = "Signed in as: " + json['user'];
-
-            //kill the link to the login page.
-            document.getElementById("login-link").setAttribute('href', '#!');
         }
     })();
 
@@ -216,7 +262,6 @@ function appendIngredientButtons(elem, container){
 
             //update the ingredient tracker
             ingredientTracker = ingredientTracker.filter(e => e.text.trim() !== elem.innerText.replace("+-", "").trim());
-            console.log("hello? " + elem.innerText);
             window.localStorage.setItem(trackerKey, JSON.stringify(ingredientTracker));
 
             container.removeChild(elem);
@@ -260,7 +305,20 @@ function updateIngredient(elem, container){
         recipes = await recipeReq();
         await populateRecipes(recipes);
     })()
+}
 
+//move favs to top
+function sortFavorites() {
+    favorites.forEach(id => {
+        //move recipes to the front
+        let index = recipes.findIndex(r => r.id === id);
+        if(index > 0){
+            const e = recipes[index];
+            recipes.splice(index, 1);
+            recipes.unshift(e);
+        }
+    });
+    (async () => await populateRecipes(recipes))();
 }
 
 //listeners for buttons

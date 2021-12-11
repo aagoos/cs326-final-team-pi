@@ -10,8 +10,6 @@ document.getElementById("login-button").addEventListener('click', async () => {
         body: JSON.stringify({username: user.value, password: pass.value})
     });
 
-    console.log(response.status)
-
     if(response.status !== 200){
         const error = document.getElementsByClassName('error')[0];
         error.innerText = "Incorrect username or password";

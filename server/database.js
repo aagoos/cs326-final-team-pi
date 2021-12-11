@@ -134,7 +134,7 @@ async function createUser(username, password) {
 async function getFavorites(username){
     const database = client.db("data");
     const users = database.collection('users');
-    const user = users.findOne(username);
+    const user = await users.findOne({'username': username});
     if(user === null){
         return []; //the user does not exist
     }
@@ -147,10 +147,7 @@ async function getFavorites(username){
 async function setFavorites(username, favorites){
     const database = client.db("data");
     const users = database.collection('users');
-    const user = users.findOne(username);
-    if(user !== null){
-        user['favorites'] = favorites;
-    }
+    await users.updateOne({'username': username}, {"$set": {'favorites': favorites}});
 }
 
 //exports

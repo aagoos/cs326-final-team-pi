@@ -58,8 +58,9 @@ app.get("/recipes", async (req, res) => {
 //return the users favorites iff logged in
 app.get('/favorites', async (req, res) => {
     if(req.isAuthenticated()) {
-        res.json(await db.getFavorites(req.user.username))
+        res.json({'favorites': await db.getFavorites(req.user)})
     }
+    res.end();
 })
 
 //update the users favorites iff logged in
