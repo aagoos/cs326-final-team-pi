@@ -180,7 +180,7 @@ Which returns the name of the current user. You must be authenticated to access 
 
 ## Alex
 
-Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css. Worked on authentication, did initial versions of login page, wrote javascript for login page. Wrote script and edited together demo video. Implemented favorites on home page.
+Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the corresponding css. Worked on authentication, did initial versions of login page, wrote javascript for login page. Wrote script and edited together demo video. Implemented favorites on home page.
 
 ## Megan
 
@@ -227,3 +227,61 @@ For front-end design, I would learn responsive design, i.e. having a fitted scre
     * Able to view user-favorited recipes while logged in
 - Routing
 - Linting/ code style
+
+## Home Page _/25 pts
+
+- Successfully displays recipes
+- Successfully adds/searches for ingredients and causes the appropriate recipes to appear containing the specified ingredients
+    * User is able to specify the date when they add an ingredient, otherwise today’s date will be appended to the ingredient
+    * Expired ingredients (older than 3 weeks) will not be included in the recipe search
+    * User’s added ingredients appear as a list on the left side
+    * Recipes contain the specified ingredients
+    * Successfully updates an ingredient by typing in the ‘Add ingredient’ bar and clicking the ‘+’ button next to the specified ingredient
+    * Successfully removes an ingredient when the ‘-‘ button next to the specified ingredient is clicked
+
+## Recipe Page _/25 pts
+
+- Recipe page for each recipe displays the appropriate title, ingredients, steps and tags
+- The image, title and steps for each recipe is uniform with the result on the home page
+- The ingredients and steps tabs are clickable and show the appropriate information when clicked
+- The text areas for ingredients and steps are scrollable
+- The back button successfully leads back to the home page
+
+## Favorites _/10 pts
+
+- User can successfully favorite recipes when logged in
+- Favorited recipes are always displayed at the top of the page if the user's pantry has relevant ingredients for them, when logged in
+- Favorited recipes are not saved when not logged in
+
+## Heroku Deployment _/5 pts
+
+- Website is accessible on Heroku
+- Website works correctly in production environment
+
+## Video Demo _/5 pts
+
+- Video demo is about 5-7 minutes long, and no longer than 10 minutes
+- Video demo includes:
+    * Project name and team name
+    * Introduction from both team members
+    * Description of the application
+    * Targeted users
+    * Important feature walkthrough
+    * Highlight of specific aspects of the application our team finds most interesting
+    * A list of what our team found easy and what our team found hard
+    * Future work – what we would do if we continued to work on this application
+
+## CRUD _/5 pts
+
+- Create: 1 pt
+    * Recipes – using the /recipes POST API endpoint 
+    * Recipes – using the /recipes PUT API endpoint
+- Read: 2 pts
+    * Specific recipes – using the /lookup GET API endpoint
+    * Search recipes – using the /recipes GET API endpoint
+- Update: 1 pt
+    * Recipes – update recipes using the /recipes PUT API endpoint
+- Delete: 1 pt
+    * Recipes – delete recipes using the /recipes DELETE API endpoint
+
+                                                    **Total: _/100 pts**
