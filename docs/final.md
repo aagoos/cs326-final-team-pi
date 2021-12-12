@@ -176,6 +176,8 @@ Worked on API endpoints in server.js, implemented database logic in the database
 
 ## Megan
 
+Came up with the recipe idea for our project, posted summary for project idea on slack, generated design layout for recipe page on wireframe, improved design and layout for home page on wireframe, wrote HTML, CSS and front-end implementation for recipe page, wrote DELETE in server.js, found recipe database, converted recipe data into appropriate JSON format, implemented findAll and findFirst in database.js, implemented POST and DELETE in server.js, hand-selected and added 300+ recipe images to the database, fixed many design/layout issues such as overlapping text and image scaling on the recipe page, made the home page and recipe page images uniform, designed and implemented the layout for the login page in HTML/CSS, found and added the pantry background graphic to the home page, added a favicon, posted all screenshots to slack from team message history for milestones 2 and beyond, recorded my parts of the video and uploaded the final video to YouTube.
+
 # Conclusion
 
 ## Alex
