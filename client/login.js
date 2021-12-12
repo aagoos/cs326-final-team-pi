@@ -36,7 +36,16 @@ document.getElementById("register-button").addEventListener('click', async () =>
         error.innerText = "Username already in use";
         error.classList.remove("hidden");
     }
-    else{
+    else{ //login and redirect
+        const response = await fetch('./login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: user.value, password: pass.value})
+        });
+
         location.href = "./index.html"
     }
 })
