@@ -103,7 +103,37 @@ HTTP 200: OK
 
 # Database
 
-The database is used to hold recipes, and to respond to API requests. It is a MongoDB atlas database. The database has one database, named `data`. There is one collection, named `recipes`. Each document in the `recipes` collection represents an individual recipe.
+The database is used to hold recipes, and to respond to API requests. It is a MongoDB atlas database. The database has one database, named `data`. One collection is named `recipes`. Each document in the `recipes` collection represents an individual recipe.
+
+Example document
+
+```json
+
+{
+    "_id":{"$oid":"61983f821023b78cdcec11b6"},
+    "id":{"$numberInt":"5"},
+    "title":"Vegetarian Chili",
+    "steps":
+        ["In a large (6qt), heavy pot, heat the oil over medium-high heat"," Add the onions, bell peppers, garlic, and serrano peppers, and cook, stirring, until soft, about 3 minutes"," Add the zucchini and mushrooms, and cook, stirring, until soft and the vegetables give off their liquid and start to brown around the edges, about 6 minutes"," Add the chili powder, cumin, salt and cayenne, and cook, stirring, until fragrant, about 30 seconds"," Add the tomatoes and stir well"," Add the beans, tomato sauce, and vegetable stock, stir well, and bring to a boil"," Reduce the heat to medium-low and simmer, stirring occasionally, for about 20 minutes","Remove from the heat and stir in the cilantro and lime juice"," Adjust the seasoning, to taste","To serve, place 1/4 cup of brown rice in the bottom of each bowl"," Ladle the chili into the bowls over the rice"," Top each serving with a dollop of sour cream and spoonful of avocado or [guacamole](http://www","xanthir","com/recipes/showrecipe","php?id=28)"," Sprinkle with [Essence](http://www","xanthir","com/recipes/showrecipe","php?id=id4) and green onions and serve"],
+    "ingredients":
+        ["2 tablespoon canola oil","1 1/2 cup yellow onions, chopped","1 cup red bell peppers, chopped","2 tablespoon garlic, minced","2 serrano peppers, stemmed, seeded, and minced","1 medium zucchini, stem ends trimmed and cut into small dice","5 large portobello mushrooms, stemmed, wiped clean and cubed","2 tablespoon chili powder","1 tablespooon ground cumin","1 1/4 teaspoon salt","1/4 teaspoon cayenne","4 large tomatoes, peeled, seeded and chopped","2 can black beans, rinsed and drained","1 15oz can tomato sauce","1 cup vegetable stock, or water","1 lime, juiced","1/4 cup cilantro, chopped","<hr>","Cooked brown rice, accompaniment","Sour cream or strained plain yogurt, garnish","Diced avocado or guacamole, garnish","Essence, garnish","Chopped green onions, garnish"],
+    "tags": 
+        ["chili","soup","vegetarian","main"],
+    "imgUrl":"https://th.bing.com/th/id/R.2d839a854f29f3442fddd4f8a1cac512?rik=OuwiIVPmGASk9Q&riu=http%3a%2f%2f2.bp.blogspot.com%2f-NsZYUc-LEek%2fUO8xk4hsu5I%2fAAAAAAAABR0%2fLK2pYHr5WYE%2fs1600%2fVegetarian%2bChili.jpg& ehk=TMg%2bacZf4rOlcSjOTvCXNeNZwkc9RcG0zQ7wpN%2fc0us%3d&risl=&pid=ImgRaw&r=0"
+    }
+```
+
+The other collection is named `users`
+
+Example Document:
+
+```json
+{
+    "_id":{"$oid":"61b52813f6e4e7311eb9b912"},
+    "username":"test","hash":"56a14d886e72db3f40e9966ec7b4c31c9740b1cb91c0811ef8deec7e1dbeec21cb089c7704a599316b12a5efe0a0631a80abde8d59cd54c83e5b0908a0ab8068",
+    "salt":"aabb4be6498bc89d9c390380b2c4ef0b",
+    "favorites":[12, 35]}
+```
 
 # URL Routes / Mapping
 
@@ -111,13 +141,38 @@ Get requests made to the root directory are mapped to the /client folder.
 
 # Authentication/Authorization
 
-All users have access to the home and recipe page. The ingredients a user has are tracked locally, so an account is not required to access any part of the site.
+All users have access to the home and recipe page. When logged in, a users favorites are stored/retried from the database.
+
+Authoization related URL mappings include
+
+`/favorites`
+
+Which GETS or POSTS the current user's favorites. You must be logged in to access this.
+
+
+`/login`
+
+Makes a request to authenticate a user. 
+
+`/logout`
+
+Logs out a user and clears their session.
+
+`/register`
+
+Creates a new user.
+
+and 
+
+`/user`
+
+Which returns the name of the current user. You must be authenticated to access this.
 
 # Division of labor
 
 ## Alex
 
-Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css.
+Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css. Worked on authentication, did initial versions of login page, wrote javascript for login page. Edited toghether demo video
 
 ## Megan
 
