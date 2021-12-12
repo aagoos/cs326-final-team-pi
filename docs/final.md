@@ -284,4 +284,4 @@ For front-end design, I would learn responsive design, i.e. having a fitted scre
 - Delete: 1 pt
     * Recipes – delete recipes using the /recipes DELETE API endpoint
 
-                                                    **Total: _/100 pts**
+**Total: _/100 pts**
