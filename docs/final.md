@@ -17,8 +17,12 @@ Megan Lew (lewmeg)
 
 Image of the home page.
 
-Users can add ingredients by filling in the textbox and optionally choosing a date. Clicking the (+) icon will add the ingredient. Clicking the small + icon will instead update the selected ingredient with the current name and date values. Clicking the - icon will remove the ingredient from the iPantry. Clicking the link on each recipe will bring you to the recipe page and load that recipe.
+Users can add ingredients by filling in the textbox and optionally choosing a date. Clicking the (+) icon will add the ingredient. Clicking the small + icon will instead update the selected ingredient with the current name and date values. Clicking the - icon will remove the ingredient from the iPantry. Clicking the link on each recipe will bring you to the recipe page and load that recipe. Clicking the star icon will allow a user to favorite a recipe, which will appear at the top of the page. Clicking log in will redirect the user to the login page.
 !["image of index page"](final_Index.PNG)
+
+Image of the home page, with ingredients added to the pantry, a favorited recipe displayed at the top and a user named 'team-pi' currently signed in. The user can log out by clicking the door icon.
+
+!["image of index page, ingredients added to pantry, favorited recipe and user signed in"](final_PantryAndFav.PNG)
 
 Image of the recipe page, ingredient tab selected. The user can read the ingredients needed for the recipe while the ingredient tab is selected.
 
@@ -28,6 +32,10 @@ Image of the recipe page, ingredient tab selected. The user can read the ingredi
 Image of the recipe page, steps tab selected. The user see all steps required to make their recipe. They can also quickly switch tabs to view the required ingredients at any time. 
 
 !["image of recipe page, steps tab"](final_Steps.PNG)
+
+Image of the login page. Users can register on iPantry by typing in a username and password and clicking register, which will redirect them to the home page. Users can log in by typing in their registered username and password and clicking login. If the user attempts to login with the wrong username or password, an error message will appear. If the user attempts to register a username already in the system, an error message will appear. The back button or iPantry logo will take them back to the home page. 
+
+!["image of login page"](final_Login.PNG)
 
 # API
 
@@ -176,7 +184,7 @@ Worked on API endpoints in server.js, implemented database logic in the database
 
 ## Megan
 
-Came up with the recipe idea for our project, posted summary for project idea on slack, generated design layout for recipe page on wireframe, improved design and layout for home page on wireframe, wrote HTML, CSS and front-end implementation for recipe page, wrote DELETE in server.js, found recipe database, converted recipe data into appropriate JSON format, implemented findAll and findFirst in database.js, implemented POST and DELETE in server.js, hand-selected and added 300+ recipe images to the database, fixed many design/layout issues such as overlapping text and image scaling on the recipe page, made the home page and recipe page images uniform, designed and implemented the layout for the login page in HTML/CSS, found and added the pantry background graphic to the home page, added a favicon, posted all screenshots to slack from team message history for milestones 2 and beyond, recorded my parts of the video and uploaded the final video to YouTube.
+Came up with the recipe idea for our project, posted summary for project idea on slack, generated design layout for recipe page on wireframe, improved design and layout for home page on wireframe, wrote HTML, CSS and front-end implementation for recipe page, wrote DELETE in server.js, found recipe database, converted recipe data into appropriate JSON format, implemented findAll and findFirst in database.js, implemented POST and DELETE in server.js, hand-selected and added 300+ recipe images to the database, fixed many design/layout issues such as overlapping text and image scaling on the recipe page, made the home page and recipe page images uniform, designed and implemented the layout for the login page in HTML/CSS, found and added the pantry background graphic to the home page, added a favicon, posted all screenshots to slack from team message history for milestones 2 and beyond, wrote rubric, recorded my parts of the video and uploaded the final video to YouTube.
 
 # Conclusion
 
@@ -207,3 +215,4 @@ Some challenges for me were writing back-end APIs, parsing the client data and v
 ### If I could start over...
 
 For front-end design, I would learn responsive design, i.e. having a fitted screen and scaling the page without anything getting cropped, which would give a better user experience for all media screens. For back-end design, I would use unit testing for back-end APIs and integrate the unit test to GitHub so the production application will not break if there are any errors. Generally, I would learn how to manage and architecture my project so that it will be easy to maintain and scale. I would either figure out a better way to generate images for the recipe data instead of finding and adding them all manually or look more extensively for a database that matches our recipe format.
+
