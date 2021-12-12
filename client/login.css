@@ -31,7 +31,6 @@ button, input, optgroup, select, textarea {
 }
 
 #inner-area {
-    /* background-color: whitesmoke; */
     background-color: lightblue;
     border-radius: 25px;
     padding: 30px;
