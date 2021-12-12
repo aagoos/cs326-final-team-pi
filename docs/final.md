@@ -216,3 +216,14 @@ Some challenges for me were writing back-end APIs, parsing the client data and v
 
 For front-end design, I would learn responsive design, i.e. having a fitted screen and scaling the page without anything getting cropped, which would give a better user experience for all media screens. For back-end design, I would use unit testing for back-end APIs and integrate the unit test to GitHub so the production application will not break if there are any errors. Generally, I would learn how to manage and architecture my project so that it will be easy to maintain and scale. I would either figure out a better way to generate images for the recipe data instead of finding and adding them all manually or look more extensively for a database that matches our recipe format.
 
+# Final Rubric 
+
+## General _/25 pts
+
+- Authentication
+    * Successfully create a user through sign up
+    * Successfully login a user
+        - User is able to log out using the door icon
+    * Able to view user-favorited recipes while logged in
+- Routing
+- Linting/ code style
