@@ -172,7 +172,7 @@ Which returns the name of the current user. You must be authenticated to access 
 
 ## Alex
 
-Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css. Worked on authentication, did initial versions of login page, wrote javascript for login page. Edited toghether demo video
+Worked on API endpoints in server.js, implemented database logic in the database.js wrapper, setup/configured heroku, worked on documentation, took screenshots for this document, expanded greatly on index.js, general bugfixes, along with a bit of standardization in our data sources (which were retrieved and merged by Megan). Worked on the initial version of server.js to configure it to serve html/js/css. Wrote filter/results table for index.html, and the correspinding css. Worked on authentication, did initial versions of login page, wrote javascript for login page. Wrote script and edited together demo video. Implemented favorites on home page.
 
 ## Megan
 
